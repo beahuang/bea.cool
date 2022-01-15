@@ -1,0 +1,60 @@
+// Colors
+$c-black: #000000;
+$c-action: #cbddbf;
+
+// Grid Column Widths
+$col-1: calc(1 / 12 * 100%);
+$col-2: calc(2 / 12 * 100%);
+$col-3: calc(3 / 12 * 100%);
+$col-4: calc(4 / 12 * 100%);
+$col-5: calc(5 / 12 * 100%);
+$col-6: calc(6 / 12 * 100%);
+$col-7: calc(7 / 12 * 100%);
+$col-8: calc(8 / 12 * 100%);
+$col-9: calc(9 / 12 * 100%);
+$col-10: calc(10 / 12 * 100%);
+$col-11: calc(11 / 12 * 100%);
+$col-12: calc(12 / 12 * 100%);
+
+// Borders
+$border: 1px solid;
+
+// Box Shadow
+$underline-link: inset 0 -1px 0 currentColor;
+
+// Accessibility
+$focus-outline-width: 5px;
+$focus-outline: $focus-outline-width solid $c-action;
+
+// Layout
+$gutter--small: 10px;
+$gutter--large: 15px;
+
+// Breakpoints
+$bp-xs: 550px;
+$bp-small: 768px;
+$bp-medium: 1040px;
+$bp-large: 1300px;
+$bp-xl: 1680px;
+
+// Transitions
+$transition-primary: all 150ms ease-in-out;
+
+// Easings
+$easeInQuad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+$easeOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+$easeInOutQuad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+$easeInExpo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+$easeOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+$easeInOutExpo: cubic-bezier(0.19, 1, 0.22, 1);
+
+$easeInCirc: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+$easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+$easeInOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+// Z-Indices
+$z-index-nav: 1000;
+$z-index-modal-overlay: 1001;
+$z-index-modal-content: 1002;
+$z-index-skip-link: 9999;

@@ -1,0 +1,85 @@
+@mixin gutter-spacing-bottom($multiplier: 1, $property: padding) {
+  #{$property}-bottom: $gutter--small * $multiplier;
+
+  @include mq($bp-gutters) {
+    #{$property}-bottom: $gutter--large * $multiplier;
+  }
+}
+
+@mixin gutter-spacing-left($multiplier: 1, $property: padding) {
+  #{$property}-left: $gutter--small * $multiplier;
+
+  @include mq($bp-gutters) {
+    #{$property}-left: $gutter--large * $multiplier;
+  }
+}
+
+@mixin gutter-spacing-right($multiplier: 1, $property: padding) {
+  #{$property}-right: $gutter--small * $multiplier;
+
+  @include mq($bp-gutters) {
+    #{$property}-right: $gutter--large * $multiplier;
+  }
+}
+
+@mixin gutter-spacing-top($multiplier: 1, $property: padding) {
+  #{$property}-top: $gutter--small * $multiplier;
+
+  @include mq($bp-gutters) {
+    #{$property}-top: $gutter--large * $multiplier;
+  }
+}
+
+@mixin gutters($multiplier: 1) {
+  @include padding(x #{$gutter--small * $multiplier});
+
+  @include mq($bp-gutters) {
+    @include padding(x #{$gutter--large * $multiplier});
+  }
+}
+
+@mixin vertical-gutters($multiplier: 1) {
+  @include padding(#{$gutter--small * $multiplier} x);
+
+  @include mq($bp-gutters) {
+    @include padding(#{$gutter--large * $multiplier} x);
+  }
+}
+
+@mixin breakout-gutters($multiplier: 1) {
+  @include margin(x #{$gutter--small * $multiplier * -1});
+
+  @include mq($bp-gutters) {
+    @include margin(x #{$gutter--large * $multiplier * -1});
+  }
+}
+
+@mixin scroll-x-container {
+  @include margin(x #{$gutter--small * -2});
+  @include padding(x #{$gutter--small * 2});
+  -ms-overflow-style: none; /* Hide Scrollbar IE and Edge */
+  overflow-x: scroll;
+  scrollbar-width: none; /* Hide Scrollbar Firefox */
+  width: 100vw;
+
+  &::-webkit-scrollbar {
+    // Hide Scrollbar Webkit
+    display: none;
+  }
+
+  @include mq($bp-gutters) {
+    @include margin(x #{$gutter--large * -2});
+    @include padding(x #{$gutter--large * 2});
+  }
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}

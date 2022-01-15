@@ -1,0 +1,11 @@
+:focus {
+  outline: $focus-outline;
+
+  &:not([data-focus-visible-added]) {
+    @include hide-outline;
+  }
+}
+
+.sr-only {
+  @include sr-only;
+}

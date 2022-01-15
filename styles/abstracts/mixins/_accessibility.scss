@@ -1,0 +1,30 @@
+/// Hides content visually; only screen readers can detect it.
+@mixin sr-only {
+  border-width: 0 !important;
+  clip: rect(0, 0, 0, 0);
+  display: block;
+  height: 1px !important;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0 !important;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px !important;
+}
+
+// Only show motion if the user doesn't have a reduced motion preference
+@mixin with-motion($has-motion: true) {
+  $preference: no-preference;
+  @if not $has-motion {
+    $preference: reduce;
+  }
+
+  @media screen and (prefers-reduced-motion: $preference) {
+    @content;
+  }
+}
+
+@mixin hide-outline {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}

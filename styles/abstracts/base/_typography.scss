@@ -1,0 +1,27 @@
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+p {
+  margin: 0;
+
+  + p {
+    margin-top: $spacing-sm;
+  }
+}
+
+a {
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button {
+  color: inherit;
+}
+
+strong {
+  font-weight: $fw-medium-sans;
+}

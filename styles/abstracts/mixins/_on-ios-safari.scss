@@ -1,0 +1,7 @@
+/// Target iOS Safari browser only.
+/// https://stackoverflow.com/a/47818418
+@mixin on-ios-safari {
+  @supports (-webkit-touch-callout: none) {
+    @content;
+  }
+}
