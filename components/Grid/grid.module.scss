@@ -1,0 +1,32 @@
+$c-grid-red: #ff0000;
+
+.grid {
+  @include grid-parent;
+  @include fixed(0);
+  flex-flow: row nowrap;
+  width: 100%;
+  pointer-events: none;
+  user-select: none;
+  z-index: $z-index-2;
+}
+
+.column {
+  @include grid-child;
+  @include size(100%);
+  position: relative;
+
+  &:not(:first-child):not(:nth-child(2)) {
+    @include mq(0, $tablet) {
+      display: none;
+    }
+  }
+}
+
+.inner {
+  @include size(100%);
+  display: flex;
+
+  .show-grid & {
+    background-color: rgba($c-grid-red, 0.25);
+  }
+}

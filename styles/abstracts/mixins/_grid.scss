@@ -1,0 +1,22 @@
+@mixin grid-parent {
+  @include padding(n $grid-spacing-mobile);
+  display: flex;
+  flex-flow: row wrap;
+
+  @include mq($tablet) {
+    @include padding(n $grid-spacing);
+  }
+
+  @include mq($desktop) {
+    @include padding(n $grid-spacing * 2);
+  }
+}
+
+@mixin grid-child {
+  @include padding(n $grid-spacing-mobile);
+  width: 100%;
+
+  @include mq($tablet) {
+    @include padding(n $grid-spacing);
+  }
+}

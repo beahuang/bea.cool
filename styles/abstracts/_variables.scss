@@ -1,6 +1,26 @@
 // Colors
+$c-light: #f5f0e01f;
 $c-black: #000000;
+$c-primary: #000000;
+$c-white: #ffffff;
 $c-action: #cbddbf;
+$c-yellow: #fbde37;
+
+$c-bg: $c-light;
+$c-highlight: rgba($c-yellow, 0.6);
+
+// Spacing
+$spacing-xs: 4px;
+$spacing-sm: 10px;
+$spacing-md: 20px;
+$spacing-lg: 30px;
+$spacing-xl: 50px;
+$spacing-xxl: 90px;
+$spacing-xxxl: 150px;
+
+// Grid Spacing
+$grid-spacing-mobile: 2.5vw;
+$grid-spacing: 1.25vw;
 
 // Grid Column Widths
 $col-1: calc(1 / 12 * 100%);
@@ -31,11 +51,12 @@ $gutter--small: 10px;
 $gutter--large: 15px;
 
 // Breakpoints
-$bp-xs: 550px;
-$bp-small: 768px;
-$bp-medium: 1040px;
-$bp-large: 1300px;
-$bp-xl: 1680px;
+$mobile: 321px;
+$mobile-lg: 410px;
+$tablet: 600px;
+$tablet-lg: 768px;
+$desktop: 1024px;
+$desktop-lg: 1440px;
 
 // Transitions
 $transition-primary: all 150ms ease-in-out;
@@ -54,6 +75,8 @@ $easeOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
 $easeInOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
 
 // Z-Indices
+$z-index-1: 1;
+$z-index-2: 2;
 $z-index-nav: 1000;
 $z-index-modal-overlay: 1001;
 $z-index-modal-content: 1002;

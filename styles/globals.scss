@@ -1,9 +1,29 @@
+@import 'normalize.css';
+@import 'abstracts';
+@import 'base';
+
 html,
 body {
+  background-color: $c-bg;
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
-    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  width: 100%;
+}
+
+body {
+  @include padding($grid-spacing-mobile);
+
+  @include mq($tablet) {
+    @include padding($grid-spacing);
+  }
+
+  @include mq($desktop) {
+    @include padding($grid-spacing * 2);
+  }
+}
+
+main {
+  min-height: 50vh;
 }
 
 a {
@@ -13,4 +33,27 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.visually-hidden {
+  @include hide;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.mobile-only {
+  @include mq($tablet) {
+    display: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Text highlight
+// ---------------------------------------------------------------------------
+
+::selection {
+  background: $c-highlight;
+  text-shadow: none;
 }

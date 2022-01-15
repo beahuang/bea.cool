@@ -2,6 +2,9 @@ const path = require('path');
 
 module.exports = {
   reactStrictMode: true,
+  images: {
+    domains: ['placekitten.com'],
+  },
   /**
    * Pass custom node-sass options.
    */

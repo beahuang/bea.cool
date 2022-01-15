@@ -4,14 +4,6 @@ body {
   padding: 0;
 }
 
-html {
-  scroll-padding-top: $nav-height--small;
-
-  @include mq($bp-gutters) {
-    scroll-padding-top: $nav-height--large;
-  }
-}
-
 * {
   box-sizing: border-box;
 }
