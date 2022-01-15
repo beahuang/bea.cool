@@ -40,7 +40,16 @@
     position: absolute;
     left: 0;
     right: 0;
-    height: 50vh;
+    height: calc(50vh - 2 * $grid-spacing);
+    z-index: 20;
+    cursor: pointer;
+  }
+
+  @include mq($desktop) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: calc(50vh - 4 * $grid-spacing);
     z-index: 20;
     cursor: pointer;
   }
