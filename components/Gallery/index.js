@@ -12,14 +12,14 @@ export default function Gallery() {
   ];
 
   return (
-    <section>
-      <div className={styles.galleryHeadingContainer}>
-        <h1 className={styles.galleryHeading}>Selected Work</h1>
+    <section className={styles.gallery}>
+      <div className={styles.headingContainer}>
+        <h1 className={styles.heading}>Selected Work</h1>
       </div>
       <div className={styles.galleryContainer}>
-        <div className={styles.galleryZoomIn}></div>
-        <div className={styles.galleryZoomOut}></div>
-        <div className={styles.galleryImageContainer}>
+        <div className={styles.zoomIn}></div>
+        <div className={styles.zoomOut}></div>
+        <div className={styles.imageContainer}>
           {gallery.map((image, i) => (
             <div className={styles.galleryImage} key={i}>
               <Image src={image} alt="hey" width="450" height="300" />
@@ -28,8 +28,8 @@ export default function Gallery() {
         </div>
       </div>
 
-      <div className={styles.gallerySlider}>
-        <input className={styles.galleryRange} type="range" min="0" max="0" />
+      <div className={styles.slider}>
+        <input className={styles.range} type="range" min="0" max="700" />
       </div>
     </section>
   );

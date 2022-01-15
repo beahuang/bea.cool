@@ -7,8 +7,10 @@ export default function Layout({ children }) {
     <>
       <SiteMeta title="ʕ•́ᴥ•̀ʔっ bea" description="~ Engineer ~" imagePath={ogImage.src} />
       <Grid />
-      <Header />
-      <main>{children}</main>
+      <main>
+        <Header />
+        {children}
+      </main>
     </>
   );
 }

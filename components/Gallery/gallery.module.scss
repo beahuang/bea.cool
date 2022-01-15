@@ -1,26 +1,122 @@
-.gallery-heading-container {
+.gallery {
+  perspective: 100vw;
+  width: calc(100vw - 2 * $grid-spacing-mobile);
+  height: calc(100vh - 2 * $grid-spacing-mobile);
+  position: relative;
+
+  @include mq($tablet) {
+    width: calc(100vw - 2 * $grid-spacing);
+    height: calc(100vh - 2 * $grid-spacing);
+  }
+
+  @include mq($desktop) {
+    width: calc(100vw - 4 * $grid-spacing);
+    height: calc(100vh - 4 * $grid-spacing);
+  }
 }
 
-.gallery-heading {
+.headingContainer {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
 }
 
-.gallery-zoom-in {
+.heading {
+  font-size: 5vw;
+  width: 100%;
+  text-align: center;
 }
 
-.gallery-zoom-out {
+.galleryContainer {
+  @include absolute(0 0 0 0);
+  width: 100%;
+  height: 100vh;
 }
 
-.gallery-image-container {
+.zoomIn,
+.zoomOut {
+  @include mq($tablet) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 50vh;
+    z-index: 20;
+    cursor: pointer;
+  }
 }
 
-.gallery-image {
+.zoomIn {
+  cursor: zoom-in;
 }
 
-.gallery-zoom-in {
+.zoomOut {
+  bottom: 0;
+  cursor: zoom-out;
 }
 
-.gallery-slider {
+.imageContainer {
+  perspective: 100vw;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.gallery-range {
+.galleryImage {
+  position: absolute;
+  max-width: 50vw;
+
+  @include mq($tablet) {
+    width: 50%;
+    max-width: inherit;
+  }
+
+  @include mq($tablet-lg) {
+    width: 18%;
+  }
+}
+
+.slider {
+  z-index: 50;
+  @include absolute(x 0 100px 0);
+  width: 95vw;
+}
+
+.range {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 10px 0;
+  width: 100%;
+  cursor: pointer;
+
+  &:focus,
+  input[type='range'] {
+    outline: none;
+  }
+
+  &::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1px;
+    cursor: pointer;
+    animate: 1s;
+    background: $c-black;
+  }
+
+  &::-webkit-slider-thumb {
+    border-width: 1px;
+    border-style: solid;
+    height: 40px;
+    width: 20px;
+    background: $c-white;
+    border-color: $c-black;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -20px;
+  }
+
+  @include mq($tablet) {
+    &:hover {
+      outline: 0;
+    }
+  }
 }

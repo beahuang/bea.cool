@@ -1,14 +1,12 @@
 .header {
+  @include absolute(0);
   @include grid-parent;
   @include padding($spacing-sm n);
   align-items: center;
   color: $c-primary;
   margin-bottom: $spacing-sm;
-  position: relative;
-
-  @include mq($tablet) {
-    @include padding($spacing-xl n);
-  }
+  height: $header-height;
+  z-index: $z-index-nav;
 }
 
 .header--dark {
