@@ -4,6 +4,7 @@
   height: calc(100vh - 2 * $grid-spacing-mobile);
   position: relative;
   margin-left: -$grid-spacing-mobile;
+  overflow: hidden;
 
   @include mq($tablet) {
     width: 100vw;
@@ -16,22 +17,6 @@
     height: calc(100vh - 4 * $grid-spacing);
     margin-left: -2 * $grid-spacing;
   }
-}
-
-.headingContainer {
-  position: relative;
-  top: 50%;
-  transform: translateY(calc(-50% - $header-height/2));
-  z-index: 10;
-}
-
-.heading {
-  font-size: 5vw;
-  width: 100%;
-  text-align: center;
-  -webkit-text-stroke: 1px $c-black;
-  transform-style: preserve-3d;
-  color: $c-white;
 }
 
 .galleryContainer {
