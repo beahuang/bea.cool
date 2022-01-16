@@ -1,24 +1,27 @@
 .gallery {
   perspective: 100vw;
-  width: calc(100vw - 2 * $grid-spacing-mobile);
+  width: 100vw;
   height: calc(100vh - 2 * $grid-spacing-mobile);
   position: relative;
+  margin-left: -$grid-spacing-mobile;
 
   @include mq($tablet) {
-    width: calc(100vw - 2 * $grid-spacing);
+    width: 100vw;
     height: calc(100vh - 2 * $grid-spacing);
+    margin-left: -$grid-spacing;
   }
 
   @include mq($desktop) {
-    width: calc(100vw - 4 * $grid-spacing);
+    width: 100vw;
     height: calc(100vh - 4 * $grid-spacing);
+    margin-left: -2 * $grid-spacing;
   }
 }
 
 .headingContainer {
   position: relative;
   top: 50%;
-  transform: translateY(-50%);
+  transform: translateY(calc(-50% - $header-height/2));
   z-index: 10;
 }
 
@@ -26,6 +29,9 @@
   font-size: 5vw;
   width: 100%;
   text-align: center;
+  -webkit-text-stroke: 1px $c-black;
+  transform-style: preserve-3d;
+  color: $c-white;
 }
 
 .galleryContainer {
@@ -86,9 +92,20 @@
 }
 
 .slider {
-  z-index: 50;
   @include absolute(x 0 100px 0);
+  @include margin(0 $grid-spacing-mobile);
+  @include padding(0 $grid-spacing-mobile);
+  z-index: 50;
   width: 95vw;
+
+  @include mq($tablet) {
+    @include margin(0 $grid-spacing);
+    @include padding(0 $grid-spacing);
+  }
+
+  @include mq($desktop) {
+    @include margin(0 2 * $grid-spacing);
+  }
 }
 
 .range {

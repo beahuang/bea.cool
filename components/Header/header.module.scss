@@ -12,3 +12,12 @@
 .header--dark {
   color: $c-white;
 }
+
+.logo {
+  @include padding(0 $grid-spacing-mobile);
+  font-size: 30px;
+
+  @include mq($tablet) {
+    @include padding(0 $grid-spacing);
+  }
+}
