@@ -16,11 +16,13 @@ export default function Gallery() {
   const sliderRef = useRef();
   const titleRef = useRef();
   const galleryRef = useRef();
+  const requestRef = useRef();
+  const zoomDirection = useRef();
+  const imageAttrObjs = useRef([]);
 
   const zMax = useRef(0);
   const [zStart, setZStart] = useState(0);
   const [zEnd, setZEnd] = useState(0);
-  const [imageAttrObjs, setImageAttrObjs] = useState([]);
   const [titleTilt, setTitleTilt] = useState({
     tiltX: 0,
     tiltY: 0,
@@ -49,20 +51,18 @@ export default function Gallery() {
   const setUpGallery = () => {
     const totalImages = gallery.length;
 
-    setImageAttrObjs(
-      gallery.map((item, index) => {
-        // TODO: this should be item height, width
-        const posObj = calculatePosition(index, 300, 450);
+    imageAttrObjs.current = gallery.map((item, index) => {
+      // TODO: this should be item height, width
+      const posObj = calculatePosition(index, 300, 450);
 
-        return {
-          translateZ: (index / totalImages) * (zMax.current * -1),
-          opacity: 1 - index / totalImages,
-          zIndex: totalImages + 1 - index,
-          top: posObj.top,
-          left: posObj.left,
-        };
-      }),
-    );
+      return {
+        translateZ: (index / totalImages) * (zMax.current * -1),
+        opacity: 1 - index / totalImages,
+        zIndex: totalImages + 1 - index,
+        top: posObj.top,
+        left: posObj.left,
+      };
+    });
   };
 
   const calculatePosition = (index, height, width) => {
@@ -138,68 +138,81 @@ export default function Gallery() {
     });
   };
 
-  const handleMouseDown = (zoomDirection = 'IN') => {
-    if (zoomDirection === 'IN') {
-      setZoomIn(true);
-    } else {
-      setZoomOut(true);
-    }
+  const handleMouseDown = (direction = 'IN') => {
+    zoomDirection.current = direction;
   };
 
-  const handleMouseUp = (zoomDirection = 'IN') => {
-    if (zoomDirection === 'IN') {
-      setZoomIn(false);
-    } else {
-      setZoomOut(false);
+  const handleMouseUp = (direction = 'IN') => {
+    zoomDirection.current = '';
+  };
+
+  const animate = () => {
+    window.requestAnimationFrame(animate);
+
+    if (zoomDirection.current === 'IN') {
+      if (zEnd <= 0) {
+        zoom('plus');
+      } else {
+        window.cancelAnimationFrame(animate);
+      }
+    } else if (zoomDirection.current === 'OUT') {
+      if (zEnd >= zStart) {
+        zoom('minus');
+      } else {
+        window.cancelAnimationFrame(animate);
+      }
     }
   };
 
   const zoom = direction => {
-    setImageAttrObjs(
-      imageAttrObjs.map((imgObj, i) => {
-        const movementInterval = (1 / gallery.length) * 1000,
-          opacityInterval = movementInterval / (1000 * 10);
-
-        let newTranslateZ, newOpacityInterval;
-
-        if (direction === 'plus') {
-          newTranslateZ = imgObj.translateZ + movementInterval;
-          newOpacityInterval = imgObj.opacity + opacityInterval;
-        } else if (direction === 'minus') {
-          newTranslateZ = imgObj.translateZ - movementInterval;
-          newOpacityInterval = imgObj.opacity - opacityInterval;
-        }
-
-        return {
-          translateZ: newTranslateZ,
-          opacity: newOpacityInterval,
-          top: imgObj.top,
-          left: imgObj.left,
-        };
-      }),
-    );
-  };
-
-  useEffect(() => {
-    if (zoomIn) {
-      zoom('plus');
-    } else if (zoomOut) {
-      zoom('minus');
+    const imageLength = imageAttrObjs.current.length;
+    if (!imageLength) {
+      return;
     }
-  }, [zoomIn, zoomOut]);
+
+    console.log('zooming', direction);
+
+    setZEnd(imageAttrObjs.current[imageLength - 1].translateZ);
+
+    imageAttrObjs.current = imageAttrObjs.current.map((imgObj, i) => {
+      const movementInterval = (1 / gallery.length) * 1000,
+        opacityInterval = movementInterval / (1000 * 10);
+
+      let newTranslateZ, newOpacityInterval;
+
+      if (direction === 'plus') {
+        newTranslateZ = imgObj.translateZ + movementInterval;
+        newOpacityInterval = imgObj.opacity + opacityInterval;
+      } else if (direction === 'minus') {
+        newTranslateZ = imgObj.translateZ - movementInterval;
+        newOpacityInterval = imgObj.opacity - opacityInterval;
+      }
+
+      return {
+        translateZ: newTranslateZ,
+        opacity: newOpacityInterval,
+        top: imgObj.top,
+        left: imgObj.left,
+      };
+    });
+  };
 
   useEffect(() => {
     zMax.current = width * 10 > 10000 ? 10000 : width * 10;
     setUpGallery();
+    requestRef.current = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(requestRef.current);
   }, []);
 
   useEffect(() => {
-    if (!imageAttrObjs.length) {
+    const imageLength = imageLength;
+    if (!imageLength) {
       return;
     }
 
-    setZStart(imageAttrObjs[imageAttrObjs.length - 1].translateZ);
-    setZEnd(imageAttrObjs[imageAttrObjs.length - 1].translateZ);
+    setZStart(imageAttrObjs.current[imageLength - 1].translateZ);
+    setZEnd(imageAttrObjs.current[imageLength - 1].translateZ);
   }, [imageAttrObjs]);
 
   return (
@@ -225,7 +238,7 @@ export default function Gallery() {
           onMouseDown={() => handleMouseDown('OUT')}
         ></button>
         <div className={styles.imageContainer}>
-          {imageAttrObjs.map((image, i) => (
+          {imageAttrObjs.current.map((image, i) => (
             <Tween
               to={{
                 transform: `translate3d(${image.left}px, ${image.top}px, ${image.translateZ}px)`,
@@ -252,7 +265,7 @@ export default function Gallery() {
         </div>
       </div>
 
-      <div className={styles.slider}>
+      {/* <div className={styles.slider}>
         <input
           ref={sliderRef}
           className={styles.range}
@@ -260,7 +273,7 @@ export default function Gallery() {
           min="0"
           max={((gallery.length - 1) / gallery.length) * zMax.current}
         />
-      </div>
+      </div> */}
     </section>
   );
 }
