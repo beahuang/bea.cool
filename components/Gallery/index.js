@@ -193,19 +193,21 @@ export default function Gallery() {
         opacity: newOpacityInterval,
         top: imgObj.top,
         left: imgObj.left,
+        image: gallery[i],
+        imageIndex: i,
       };
     });
 
-    const currentZoom = imageAttrObjs.current[imageLength - 1].translateZ;
-
-    setCurrentGalleryImage(getClosestGalleryImage(currentZoom));
-    zCurr.current = currentZoom;
+    setCurrentGalleryImage(getGalleryImageInView());
+    zCurr.current = imageAttrObjs.current[imageLength - 1].translateZ;
   };
 
-  const getClosestGalleryImage = currentZoom => {
-    // console.log(currentZoom);
-    // console.log(imageAttrObjs.current);
-    return imageAttrObjs.current[0];
+  const getGalleryImageInView = () => {
+    const currentInView = imageAttrObjs.current.find(x => {
+      return 1100 > x.translateZ && x.translateZ >= 0;
+    });
+
+    return currentInView;
   };
 
   useEffect(() => {
@@ -271,6 +273,13 @@ export default function Gallery() {
             ))}
           </div>
         </div>
+
+        {currentGalleryImage && (
+          <div>
+            <p>{currentGalleryImage.image}</p>
+            <p>{currentGalleryImage.imageIndex}</p>
+          </div>
+        )}
 
         <div className={styles.slider}>
           <input
