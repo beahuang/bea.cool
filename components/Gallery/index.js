@@ -24,6 +24,10 @@ export default function Gallery() {
     tiltY: 0,
     degree: 0,
   });
+  const [imageTilt, setImageTilt] = useState({
+    tiltX: 0,
+    tiltY: 0,
+  });
 
   const gallery = [
     'https://placekitten.com/450/300',
@@ -94,22 +98,27 @@ export default function Gallery() {
   };
 
   const handleMouseMove = e => {
-    // const x = (e.clientX - width / 2) / (width / 40);
-    // const y = (e.clientY - height / 2) / (width / 40);
-
-    // imageAttrObjs.map((imgObj, i) => {
-    //   var $img = _this.images.eq(i).find('img');
-
-    //   TweenLite.to($img, 0.4, {
-    //     x: x * (i + 1),
-    //     y: y * (i + 1),
-    //   });
-    // });
-
+    handleImageTilt(e);
     handleTitleTilt(e);
   };
 
+  const handleImageTilt = e => {
+    const TILT_POWER = 30;
+
+    const cx = Math.ceil(width / 2),
+      cy = Math.ceil(height / 2),
+      tiltX = (e.clientX - cx) / (width / TILT_POWER),
+      tiltY = (e.clientY - cy) / (width / TILT_POWER);
+
+    setImageTilt({
+      tiltX,
+      tiltY,
+    });
+  };
+
   const handleTitleTilt = e => {
+    const TILT_POWER = 30;
+
     const cx = Math.ceil(width / 2),
       cy = Math.ceil(height / 2),
       dx = e.pageX - cx,
@@ -117,7 +126,7 @@ export default function Gallery() {
       tiltX = dy / cy,
       tiltY = -(dx / cx),
       radius = Math.sqrt(Math.pow(tiltX, 2) + Math.pow(tiltY, 2)),
-      degree = radius * 50;
+      degree = radius * TILT_POWER;
 
     setTitleTilt({
       tiltX,
@@ -156,15 +165,24 @@ export default function Gallery() {
         <div className={styles.imageContainer}>
           {imageAttrObjs.map((image, i) => (
             <div
-              className={styles.galleryImage}
-              key={i}
               style={{
                 transform: `translate3d(${image.left}px, ${image.top}px, ${image.translateZ}px)`,
                 opacity: image.opacity,
                 zIndex: image.zIndex,
+                position: 'relative',
               }}
+              key={i}
             >
-              <Image src={gallery[i]} alt="hey" width="450" height="300" />
+              <Tween
+                to={{
+                  x: imageTilt.tiltX * (i + 1),
+                  y: imageTilt.tiltY * (i + 1),
+                }}
+              >
+                <div className={styles.galleryImage}>
+                  <Image src={gallery[i]} alt="hey" width="450" height="300" />
+                </div>
+              </Tween>
             </div>
           ))}
         </div>
