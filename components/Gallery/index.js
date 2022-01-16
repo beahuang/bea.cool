@@ -240,12 +240,53 @@ export default function Gallery() {
   };
 
   useEffect(() => {
-    zMax.current = width * 10 > 10000 ? 10000 : width * 10;
+    // zMax.current = width * 10 > 10000 ? 10000 : width * 100;
+    zMax.current = width * 15;
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
 
     return () => cancelAnimationFrame(requestRef.current);
   }, []);
+
+  const [scrollDir, setScrollDir] = useState('scrolling down');
+
+  useEffect(() => {
+    const threshold = 0;
+    let lastScrollY = window.pageYOffset;
+    let ticking = false;
+
+    const updateScrollDir = () => {
+      const scrollY = window.pageYOffset;
+
+      if (Math.abs(scrollY - lastScrollY) < threshold) {
+        ticking = false;
+        return;
+      }
+      setScrollDir(scrollY > lastScrollY ? 'scrolling down' : 'scrolling up');
+      lastScrollY = scrollY > 0 ? scrollY : 0;
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(updateScrollDir);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll);
+    console.log(scrollDir);
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [scrollDir]);
+
+  const onWheel = e => {
+    if (e.deltaY > 0 && zCurr.current <= 0) {
+      zoom('plus');
+    } else if (e.deltaY < 0 && zCurr.current >= zStart.current) {
+      zoom('minus');
+    }
+  };
 
   return (
     <>
@@ -254,7 +295,7 @@ export default function Gallery() {
           <h1>loading...</h1>
         </section>
       )}
-      <section className={styles.gallery} onMouseMove={handleMouseMove}>
+      <section className={styles.gallery} onMouseMove={handleMouseMove} onWheelCapture={onWheel}>
         <div className={styles.headingContainer} ref={titleRef}>
           <Tween
             to={{
