@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 
 import { useState, useEffect, useRef } from 'react';
@@ -20,10 +21,11 @@ export default function Gallery() {
   const zoomDirection = useRef();
   const imageAttrObjs = useRef([]);
   const zMax = useRef(0);
+  const zStart = useRef(0);
+  const zCurr = useRef(0);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [zStart, setZStart] = useState(0);
-  const [zEnd, setZEnd] = useState(0);
+  const [currentGalleryImage, setCurrentGalleryImage] = useState();
   const [titleTilt, setTitleTilt] = useState({
     tiltX: 0,
     tiltY: 0,
@@ -36,15 +38,15 @@ export default function Gallery() {
 
   const gallery = [
     'https://placekitten.com/450/300',
+    'https://placekitten.com/200/300',
     'https://placekitten.com/450/300',
+    'https://placekitten.com/450/200',
+    'https://placekitten.com/600/300',
+    'https://placekitten.com/400/300',
     'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/300',
+    'https://placekitten.com/150/300',
+    'https://placekitten.com/550/300',
+    'https://placekitten.com/450/600',
   ];
 
   const setUpGallery = () => {
@@ -63,6 +65,7 @@ export default function Gallery() {
       };
     });
 
+    zStart.current = imageAttrObjs.current[totalImages - 1].translateZ;
     setIsLoading(false);
   };
 
@@ -143,7 +146,7 @@ export default function Gallery() {
     zoomDirection.current = direction;
   };
 
-  const handleMouseUp = (direction = 'IN') => {
+  const clearZoomDirection = () => {
     zoomDirection.current = '';
   };
 
@@ -151,13 +154,13 @@ export default function Gallery() {
     window.requestAnimationFrame(animate);
 
     if (zoomDirection.current === 'IN') {
-      if (zEnd <= 0) {
+      if (zCurr.current <= 0) {
         zoom('plus');
       } else {
         window.cancelAnimationFrame(animate);
       }
     } else if (zoomDirection.current === 'OUT') {
-      if (zEnd >= zStart) {
+      if (zCurr.current >= zStart.current) {
         zoom('minus');
       } else {
         window.cancelAnimationFrame(animate);
@@ -170,8 +173,6 @@ export default function Gallery() {
     if (!imageLength) {
       return;
     }
-
-    setZEnd(imageAttrObjs.current[imageLength - 1].translateZ);
 
     imageAttrObjs.current = imageAttrObjs.current.map((imgObj, i) => {
       const movementInterval = (1 / gallery.length) * 1000,
@@ -194,6 +195,17 @@ export default function Gallery() {
         left: imgObj.left,
       };
     });
+
+    const currentZoom = imageAttrObjs.current[imageLength - 1].translateZ;
+
+    setCurrentGalleryImage(getClosestGalleryImage(currentZoom));
+    zCurr.current = currentZoom;
+  };
+
+  const getClosestGalleryImage = currentZoom => {
+    // console.log(currentZoom);
+    // console.log(imageAttrObjs.current);
+    return imageAttrObjs.current[0];
   };
 
   useEffect(() => {
@@ -224,12 +236,12 @@ export default function Gallery() {
         <div className={styles.galleryContainer} ref={galleryRef}>
           <button
             className={styles.zoomIn}
-            onMouseUp={() => handleMouseUp('IN')}
+            onMouseUp={clearZoomDirection}
             onMouseDown={() => handleMouseDown('IN')}
           ></button>
           <button
             className={styles.zoomOut}
-            onMouseUp={() => handleMouseUp('OUT')}
+            onMouseUp={clearZoomDirection}
             onMouseDown={() => handleMouseDown('OUT')}
           ></button>
           <div className={styles.imageContainer}>
@@ -251,7 +263,7 @@ export default function Gallery() {
                     }}
                   >
                     <div className={styles.galleryImage}>
-                      <Image src={gallery[i]} alt="hey" width="450" height="300" />
+                      <img src={gallery[i]} alt="hey" />
                     </div>
                   </Tween>
                 </div>
