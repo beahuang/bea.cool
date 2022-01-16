@@ -35,6 +35,7 @@ export default function Gallery() {
     tiltX: 0,
     tiltY: 0,
   });
+  const [sliderVal, setSliderVal] = useState(0);
 
   const gallery = [
     'https://placekitten.com/450/300',
@@ -198,12 +199,14 @@ export default function Gallery() {
       };
     });
 
+    setSliderVal(imageAttrObjs.current[0].translateZ);
     setCurrentGalleryImage(getGalleryImageInView());
     zCurr.current = imageAttrObjs.current[imageLength - 1].translateZ;
   };
 
   const sliderZoom = evt => {
     const sliderVal = parseInt(evt.target.value);
+    setSliderVal(sliderVal);
 
     const imageLength = imageAttrObjs.current.length;
     if (!imageLength) {
@@ -357,6 +360,7 @@ export default function Gallery() {
             className={styles.range}
             type="range"
             min="0"
+            value={sliderVal}
             max={((gallery.length - 1) / gallery.length) * zMax.current}
             onChange={sliderZoom}
           />
