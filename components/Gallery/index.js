@@ -19,8 +19,9 @@ export default function Gallery() {
   const requestRef = useRef();
   const zoomDirection = useRef();
   const imageAttrObjs = useRef([]);
-
   const zMax = useRef(0);
+
+  const [isLoading, setIsLoading] = useState(true);
   const [zStart, setZStart] = useState(0);
   const [zEnd, setZEnd] = useState(0);
   const [titleTilt, setTitleTilt] = useState({
@@ -32,8 +33,6 @@ export default function Gallery() {
     tiltX: 0,
     tiltY: 0,
   });
-  const [zoomIn, setZoomIn] = useState(false);
-  const [zoomOut, setZoomOut] = useState(false);
 
   const gallery = [
     'https://placekitten.com/450/300',
@@ -63,6 +62,8 @@ export default function Gallery() {
         left: posObj.left,
       };
     });
+
+    setIsLoading(false);
   };
 
   const calculatePosition = (index, height, width) => {
@@ -170,8 +171,6 @@ export default function Gallery() {
       return;
     }
 
-    console.log('zooming', direction);
-
     setZEnd(imageAttrObjs.current[imageLength - 1].translateZ);
 
     imageAttrObjs.current = imageAttrObjs.current.map((imgObj, i) => {
@@ -205,75 +204,72 @@ export default function Gallery() {
     return () => cancelAnimationFrame(requestRef.current);
   }, []);
 
-  useEffect(() => {
-    const imageLength = imageLength;
-    if (!imageLength) {
-      return;
-    }
-
-    setZStart(imageAttrObjs.current[imageLength - 1].translateZ);
-    setZEnd(imageAttrObjs.current[imageLength - 1].translateZ);
-  }, [imageAttrObjs]);
-
   return (
-    <section className={styles.gallery} onMouseMove={handleMouseMove}>
-      <div className={styles.headingContainer} ref={titleRef}>
-        <Tween
-          to={{
-            transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
-          }}
-        >
-          <h1 className={styles.heading}>Selected Work</h1>
-        </Tween>
-      </div>
-      <div className={styles.galleryContainer} ref={galleryRef}>
-        <button
-          className={styles.zoomIn}
-          onMouseUp={() => handleMouseUp('IN')}
-          onMouseDown={() => handleMouseDown('IN')}
-        ></button>
-        <button
-          className={styles.zoomOut}
-          onMouseUp={() => handleMouseUp('OUT')}
-          onMouseDown={() => handleMouseDown('OUT')}
-        ></button>
-        <div className={styles.imageContainer}>
-          {imageAttrObjs.current.map((image, i) => (
-            <Tween
-              to={{
-                transform: `translate3d(${image.left}px, ${image.top}px, ${image.translateZ}px)`,
-                opacity: image.opacity,
-                zIndex: image.zIndex,
-                position: 'relative',
-              }}
-              key={i}
-            >
-              <div>
-                <Tween
-                  to={{
-                    x: imageTilt.tiltX * (i + 1),
-                    y: imageTilt.tiltY * (i + 1),
-                  }}
-                >
-                  <div className={styles.galleryImage}>
-                    <Image src={gallery[i]} alt="hey" width="450" height="300" />
-                  </div>
-                </Tween>
-              </div>
-            </Tween>
-          ))}
+    <>
+      {isLoading && (
+        <section>
+          <h1>loading...</h1>
+        </section>
+      )}
+      <section className={styles.gallery} onMouseMove={handleMouseMove}>
+        <div className={styles.headingContainer} ref={titleRef}>
+          <Tween
+            to={{
+              transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
+            }}
+          >
+            <h1 className={styles.heading}>Selected Work</h1>
+          </Tween>
         </div>
-      </div>
+        <div className={styles.galleryContainer} ref={galleryRef}>
+          <button
+            className={styles.zoomIn}
+            onMouseUp={() => handleMouseUp('IN')}
+            onMouseDown={() => handleMouseDown('IN')}
+          ></button>
+          <button
+            className={styles.zoomOut}
+            onMouseUp={() => handleMouseUp('OUT')}
+            onMouseDown={() => handleMouseDown('OUT')}
+          ></button>
+          <div className={styles.imageContainer}>
+            {imageAttrObjs.current.map((image, i) => (
+              <Tween
+                to={{
+                  transform: `translate3d(${image.left}px, ${image.top}px, ${image.translateZ}px)`,
+                  opacity: image.opacity,
+                  zIndex: image.zIndex,
+                  position: 'relative',
+                }}
+                key={i}
+              >
+                <div>
+                  <Tween
+                    to={{
+                      x: imageTilt.tiltX * (i + 1),
+                      y: imageTilt.tiltY * (i + 1),
+                    }}
+                  >
+                    <div className={styles.galleryImage}>
+                      <Image src={gallery[i]} alt="hey" width="450" height="300" />
+                    </div>
+                  </Tween>
+                </div>
+              </Tween>
+            ))}
+          </div>
+        </div>
 
-      {/* <div className={styles.slider}>
-        <input
-          ref={sliderRef}
-          className={styles.range}
-          type="range"
-          min="0"
-          max={((gallery.length - 1) / gallery.length) * zMax.current}
-        />
-      </div> */}
-    </section>
+        <div className={styles.slider}>
+          <input
+            ref={sliderRef}
+            className={styles.range}
+            type="range"
+            min="0"
+            max={((gallery.length - 1) / gallery.length) * zMax.current}
+          />
+        </div>
+      </section>
+    </>
   );
 }
