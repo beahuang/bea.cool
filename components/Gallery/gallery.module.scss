@@ -19,6 +19,22 @@
   }
 }
 
+.headingContainer {
+  position: relative;
+  top: 50%;
+  transform: translateY(calc(-50% - $header-height/2));
+  z-index: 10;
+}
+
+.heading {
+  font-size: 5vw;
+  width: 100%;
+  text-align: center;
+  -webkit-text-stroke: 1px $c-black;
+  transform-style: preserve-3d;
+  color: $c-white;
+}
+
 .galleryContainer {
   @include absolute(0 0 0 0);
   width: 100%;
@@ -27,22 +43,17 @@
 
 .zoomIn,
 .zoomOut {
+  width: 100%;
+
   @include mq($tablet) {
-    position: absolute;
-    left: 0;
-    right: 0;
+    @include absolute(x 0 x 0);
     height: calc(50vh - 2 * $grid-spacing);
     z-index: 20;
     cursor: pointer;
   }
 
   @include mq($desktop) {
-    position: absolute;
-    left: 0;
-    right: 0;
     height: calc(50vh - 4 * $grid-spacing);
-    z-index: 20;
-    cursor: pointer;
   }
 }
 

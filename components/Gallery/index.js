@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { useState, useEffect, useRef } from 'react';
 import { useWindowDimensions } from 'hooks';
 import { Tween } from 'react-gsap';
@@ -15,7 +17,7 @@ export default function Gallery() {
   const titleRef = useRef();
   const galleryRef = useRef();
 
-  const [zMax, setZMax] = useState(0);
+  const zMax = useRef(0);
   const [zStart, setZStart] = useState(0);
   const [zEnd, setZEnd] = useState(0);
   const [imageAttrObjs, setImageAttrObjs] = useState([]);
@@ -28,6 +30,8 @@ export default function Gallery() {
     tiltX: 0,
     tiltY: 0,
   });
+  const [zoomIn, setZoomIn] = useState(false);
+  const [zoomOut, setZoomOut] = useState(false);
 
   const gallery = [
     'https://placekitten.com/450/300',
@@ -45,14 +49,13 @@ export default function Gallery() {
   const setUpGallery = () => {
     const totalImages = gallery.length;
 
-    setZMax(width * 10 > 10000 ? 10000 : width * 10);
     setImageAttrObjs(
       gallery.map((item, index) => {
         // TODO: this should be item height, width
         const posObj = calculatePosition(index, 300, 450);
 
         return {
-          translateZ: (index / totalImages) * (zMax * -1),
+          translateZ: (index / totalImages) * (zMax.current * -1),
           opacity: 1 - index / totalImages,
           zIndex: totalImages + 1 - index,
           top: posObj.top,
@@ -135,7 +138,58 @@ export default function Gallery() {
     });
   };
 
+  const handleMouseDown = (zoomDirection = 'IN') => {
+    if (zoomDirection === 'IN') {
+      setZoomIn(true);
+    } else {
+      setZoomOut(true);
+    }
+  };
+
+  const handleMouseUp = (zoomDirection = 'IN') => {
+    if (zoomDirection === 'IN') {
+      setZoomIn(false);
+    } else {
+      setZoomOut(false);
+    }
+  };
+
+  const zoom = direction => {
+    setImageAttrObjs(
+      imageAttrObjs.map((imgObj, i) => {
+        const movementInterval = (1 / gallery.length) * 1000,
+          opacityInterval = movementInterval / (1000 * 10);
+
+        let newTranslateZ, newOpacityInterval;
+
+        if (direction === 'plus') {
+          newTranslateZ = imgObj.translateZ + movementInterval;
+          newOpacityInterval = imgObj.opacity + opacityInterval;
+        } else if (direction === 'minus') {
+          newTranslateZ = imgObj.translateZ - movementInterval;
+          newOpacityInterval = imgObj.opacity - opacityInterval;
+        }
+
+        return {
+          translateZ: newTranslateZ,
+          opacity: newOpacityInterval,
+          top: imgObj.top,
+          left: imgObj.left,
+        };
+      }),
+    );
+  };
+
   useEffect(() => {
+    if (zoomIn) {
+      zoom('plus');
+    } else if (zoomOut) {
+      zoom('minus');
+    }
+  }, [zoomIn, zoomOut]);
+
+  useEffect(() => {
+    zMax.current = width * 10 > 10000 ? 10000 : width * 10;
     setUpGallery();
   }, []);
 
@@ -160,12 +214,20 @@ export default function Gallery() {
         </Tween>
       </div>
       <div className={styles.galleryContainer} ref={galleryRef}>
-        <div className={styles.zoomIn}></div>
-        <div className={styles.zoomOut}></div>
+        <button
+          className={styles.zoomIn}
+          onMouseUp={() => handleMouseUp('IN')}
+          onMouseDown={() => handleMouseDown('IN')}
+        ></button>
+        <button
+          className={styles.zoomOut}
+          onMouseUp={() => handleMouseUp('OUT')}
+          onMouseDown={() => handleMouseDown('OUT')}
+        ></button>
         <div className={styles.imageContainer}>
           {imageAttrObjs.map((image, i) => (
-            <div
-              style={{
+            <Tween
+              to={{
                 transform: `translate3d(${image.left}px, ${image.top}px, ${image.translateZ}px)`,
                 opacity: image.opacity,
                 zIndex: image.zIndex,
@@ -173,17 +235,19 @@ export default function Gallery() {
               }}
               key={i}
             >
-              <Tween
-                to={{
-                  x: imageTilt.tiltX * (i + 1),
-                  y: imageTilt.tiltY * (i + 1),
-                }}
-              >
-                <div className={styles.galleryImage}>
-                  <Image src={gallery[i]} alt="hey" width="450" height="300" />
-                </div>
-              </Tween>
-            </div>
+              <div>
+                <Tween
+                  to={{
+                    x: imageTilt.tiltX * (i + 1),
+                    y: imageTilt.tiltY * (i + 1),
+                  }}
+                >
+                  <div className={styles.galleryImage}>
+                    <Image src={gallery[i]} alt="hey" width="450" height="300" />
+                  </div>
+                </Tween>
+              </div>
+            </Tween>
           ))}
         </div>
       </div>
@@ -194,7 +258,7 @@ export default function Gallery() {
           className={styles.range}
           type="range"
           min="0"
-          max={((gallery.length - 1) / gallery.length) * zMax}
+          max={((gallery.length - 1) / gallery.length) * zMax.current}
         />
       </div>
     </section>
