@@ -178,19 +178,48 @@ export default function Gallery() {
       const movementInterval = (1 / gallery.length) * 1000,
         opacityInterval = movementInterval / (1000 * 10);
 
-      let newTranslateZ, newOpacityInterval;
+      let newTranslateZ, newOpacity;
 
       if (direction === 'plus') {
         newTranslateZ = imgObj.translateZ + movementInterval;
-        newOpacityInterval = imgObj.opacity + opacityInterval;
+        newOpacity = imgObj.opacity + opacityInterval;
       } else if (direction === 'minus') {
         newTranslateZ = imgObj.translateZ - movementInterval;
-        newOpacityInterval = imgObj.opacity - opacityInterval;
+        newOpacity = imgObj.opacity - opacityInterval;
       }
 
       return {
         translateZ: newTranslateZ,
-        opacity: newOpacityInterval,
+        opacity: newOpacity,
+        top: imgObj.top,
+        left: imgObj.left,
+        image: gallery[i],
+        imageIndex: i,
+      };
+    });
+
+    setCurrentGalleryImage(getGalleryImageInView());
+    zCurr.current = imageAttrObjs.current[imageLength - 1].translateZ;
+  };
+
+  const sliderZoom = evt => {
+    const sliderVal = parseInt(evt.target.value);
+
+    const imageLength = imageAttrObjs.current.length;
+    if (!imageLength) {
+      return;
+    }
+
+    imageAttrObjs.current = imageAttrObjs.current.map((imgObj, i) => {
+      const initialImgPos = (i / gallery.length) * (zMax.current * -1);
+      const newTranslateZ = initialImgPos + sliderVal;
+
+      const initialOpacity = 1 - i / gallery.length;
+      const newOpacity = initialOpacity + (1 * sliderVal) / zMax.current;
+
+      return {
+        translateZ: newTranslateZ,
+        opacity: newOpacity,
         top: imgObj.top,
         left: imgObj.left,
         image: gallery[i],
@@ -288,6 +317,7 @@ export default function Gallery() {
             type="range"
             min="0"
             max={((gallery.length - 1) / gallery.length) * zMax.current}
+            onChange={sliderZoom}
           />
         </div>
       </section>
