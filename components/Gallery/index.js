@@ -70,6 +70,10 @@ export default function Gallery() {
     setIsLoading(false);
   };
 
+  const handleResize = () => {
+    setUpGallery();
+  };
+
   const calculatePosition = (index, height, width) => {
     const quadrant = index % 4;
     const { height: galleryHeight, width: galleryWidth } =
@@ -247,41 +251,15 @@ export default function Gallery() {
     zMax.current = width * 15;
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('deviceorientation', handleMobileTilt);
 
-    return () => cancelAnimationFrame(requestRef.current);
+    return () => {
+      cancelAnimationFrame(requestRef.current);
+      window.removeEventListener('resize');
+      window.removeEventListener('deviceorientation');
+    };
   }, []);
-
-  const [scrollDir, setScrollDir] = useState('scrolling down');
-
-  useEffect(() => {
-    const threshold = 0;
-    let lastScrollY = window.pageYOffset;
-    let ticking = false;
-
-    const updateScrollDir = () => {
-      const scrollY = window.pageYOffset;
-
-      if (Math.abs(scrollY - lastScrollY) < threshold) {
-        ticking = false;
-        return;
-      }
-      setScrollDir(scrollY > lastScrollY ? 'scrolling down' : 'scrolling up');
-      lastScrollY = scrollY > 0 ? scrollY : 0;
-      ticking = false;
-    };
-
-    const onScroll = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(updateScrollDir);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', onScroll);
-    console.log(scrollDir);
-
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [scrollDir]);
 
   const onWheel = e => {
     if (e.deltaY > 0 && zCurr.current <= 0) {
@@ -289,6 +267,18 @@ export default function Gallery() {
     } else if (e.deltaY < 0 && zCurr.current >= zStart.current) {
       zoom('minus');
     }
+  };
+
+  const handleMobileTilt = e => {
+    const TILT_MAX = 100;
+
+    const x = (e.gamma / 90) * TILT_MAX;
+    const y = (e.beta / 90) * TILT_MAX;
+
+    setImageTilt({
+      tiltX: x,
+      tiltY: y,
+    });
   };
 
   return (
