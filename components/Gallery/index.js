@@ -6,6 +6,7 @@ import { useWindowDimensions } from 'hooks';
 import { Tween } from 'react-gsap';
 import { getRandomInt } from 'utils';
 
+import { ItemDescription } from 'components';
 import styles from './gallery.module.scss';
 
 export default function Gallery({ items }) {
@@ -312,12 +313,7 @@ export default function Gallery({ items }) {
           </div>
         </div>
 
-        {currentGalleryImage && (
-          <div>
-            <p>{currentGalleryImage.item.title}</p>
-            <p>{currentGalleryImage.imageIndex}</p>
-          </div>
-        )}
+        {currentGalleryImage && <ItemDescription item={currentGalleryImage.item} />}
 
         <div className={styles.slider}>
           <input

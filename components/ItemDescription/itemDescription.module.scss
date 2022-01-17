@@ -1,0 +1,61 @@
+.container {
+  @include absolute(calc($header-height + $spacing-sm) x x $col-1);
+  @include grid-parent;
+  flex-flow: column;
+  align-items: flex-start;
+  border: 1px solid $c-black;
+  width: $col-10;
+  z-index: $z-index-modal-content;
+  background: $c-white;
+
+  @include mq($tablet) {
+    @include absolute(inherit x $spacing-md $col-1);
+    align-items: flex-end;
+    flex-flow: row wrap;
+    padding-right: 0;
+  }
+}
+
+.content {
+  @include grid-child;
+  width: $col-8;
+}
+
+.title {
+  @include margin($spacing-sm x 0);
+
+  @include mq($tablet) {
+    @include margin($spacing-lg x 0);
+  }
+}
+
+.description {
+  @include margin($spacing-xs x $spacing-sm);
+
+  @include mq($tablet) {
+    @include margin($spacing-xs x $spacing-lg);
+  }
+}
+
+.links {
+  @include margin($spacing-xs x $spacing-sm);
+  @include grid-parent;
+  width: $col-4;
+  justify-content: space-between;
+  text-align: center;
+
+  @include mq($tablet) {
+    @include margin($spacing-xs x $spacing-lg);
+    padding-left: 0;
+  }
+}
+
+.item {
+  @include padding($spacing-xs);
+  width: $col-5;
+  margin-left: $col-1;
+
+  &:hover {
+    font-style: italic;
+  }
+}
