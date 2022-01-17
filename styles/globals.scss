@@ -8,6 +8,16 @@ body {
   padding: 0;
   margin: 0;
   width: 100%;
+
+  &.dark-mode {
+    background-color: $c-black;
+
+    input {
+      &::-webkit-slider-runnable-track {
+        background: $c-white;
+      }
+    }
+  }
 }
 
 body {
