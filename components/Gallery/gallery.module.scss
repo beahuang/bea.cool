@@ -1,6 +1,6 @@
 .gallery {
   perspective: 100vw;
-  width: 80vw;
+  width: 100vw;
   height: calc(100vh - 2 * $grid-spacing-mobile);
   position: relative;
   margin-left: -$grid-spacing-mobile;
@@ -76,7 +76,6 @@
 .galleryImage {
   position: absolute;
   max-width: 50vw;
-  -webkit-transform: translate3d(0, 0, 0);
 
   @include mq($tablet) {
     width: 50%;
@@ -84,7 +83,7 @@
   }
 
   @include mq($tablet-lg) {
-    width: 25%;
+    width: 40%;
   }
 }
 
@@ -92,15 +91,20 @@
   @include absolute(x 0 100px 0);
   @include margin(0 $grid-spacing-mobile);
   @include padding(0 $grid-spacing-mobile);
-  z-index: 50;
+  z-index: $z-index-slider-overlay;
   width: 95vw;
 
   @include mq($tablet) {
+    @include absolute(15vh x x calc(100% - 40px - 2.5vw));
     @include margin(0 $grid-spacing);
     @include padding(0 $grid-spacing);
+    transform: rotate(90deg);
+    width: 70vh;
+    -webkit-transform-origin: left top;
   }
 
   @include mq($desktop) {
+    @include absolute(15vh x x calc(100% - 40px - 5vw));
     @include margin(0 2 * $grid-spacing);
   }
 }
