@@ -265,7 +265,7 @@ export default function Gallery({ items }) {
               transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
             }}
           >
-            <h1 className={styles.heading}>Selected Work</h1>
+            <h1 className={styles.heading}>Selected Projects</h1>
           </Tween>
         </div>
         <div className={styles.galleryContainer} ref={galleryRef}>

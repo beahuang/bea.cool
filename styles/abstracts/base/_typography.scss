@@ -1,5 +1,7 @@
 html,
 body {
+  @include body-text;
+  color: $c-primary;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -20,4 +22,14 @@ a {
 
 button {
   color: inherit;
+}
+
+h1,
+.h1 {
+  @include h1;
+}
+
+h4,
+.h4 {
+  @include h4;
 }

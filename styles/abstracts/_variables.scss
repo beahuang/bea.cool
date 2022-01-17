@@ -9,6 +9,29 @@ $c-yellow: #fbde37;
 $c-bg: $c-light;
 $c-highlight: rgba($c-yellow, 0.6);
 
+// Fallback font stacks https://systemfontstack.com/
+$ff-sans-stack: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue,
+  helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+$ff-serif-stack: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times,
+  Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, serif;
+$ff-mono-stack: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
+
+// Typefaces
+$ff-sans: Apercu, $ff-sans-stack;
+$ff-mono: Inconsolata, $ff-mono-stack;
+
+// Font Weights
+$fw-medium-sans: 400;
+$fw-regular-mono: 300;
+
+// Line Heights
+$lh-base: 1.5;
+$lh-loose: 1.75;
+$lh-md: 1.4;
+$lh-tight: 1.25;
+$lh-tighter: 1.2;
+$lh-heading: 1;
+
 // Spacing
 $spacing-xs: 4px;
 $spacing-sm: 10px;
@@ -81,6 +104,5 @@ $easeInOutCirc: cubic-bezier(0.075, 0.82, 0.165, 1);
 $z-index-1: 1;
 $z-index-2: 2;
 $z-index-nav: 1000;
-$z-index-slider-overlay: 1001;
 $z-index-modal-content: 1002;
 $z-index-skip-link: 9999;
