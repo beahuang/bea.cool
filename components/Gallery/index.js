@@ -1,18 +1,14 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @next/next/no-img-element, react-hooks/exhaustive-deps */
 
 import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
 import { useWindowDimensions } from 'hooks';
 import { Tween } from 'react-gsap';
-import Image from 'next/image';
+import { getRandomInt } from 'utils';
 
 import styles from './gallery.module.scss';
 
-const getRandomInt = (min, max) => {
-  return Math.random() * (max - min) + min;
-};
-
-export default function Gallery() {
+export default function Gallery({ items }) {
   const { height, width } = useWindowDimensions();
   const sliderRef = useRef();
   const titleRef = useRef();
@@ -37,23 +33,10 @@ export default function Gallery() {
   });
   const [sliderVal, setSliderVal] = useState(0);
 
-  const gallery = [
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/200/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/450/200',
-    'https://placekitten.com/600/300',
-    'https://placekitten.com/400/300',
-    'https://placekitten.com/450/300',
-    'https://placekitten.com/150/300',
-    'https://placekitten.com/550/300',
-    'https://placekitten.com/450/600',
-  ];
-
   const setUpGallery = () => {
-    const totalImages = gallery.length;
+    const totalImages = items.length;
 
-    imageAttrObjs.current = gallery.map((item, index) => {
+    imageAttrObjs.current = items.map((item, index) => {
       // TODO: this should be item height, width
       const posObj = calculatePosition(index, 300, 450);
 
@@ -63,6 +46,8 @@ export default function Gallery() {
         zIndex: totalImages + 1 - index,
         top: posObj.top,
         left: posObj.left,
+        item: items[index],
+        imageIndex: index,
       };
     });
 
@@ -179,8 +164,8 @@ export default function Gallery() {
       return;
     }
 
-    imageAttrObjs.current = imageAttrObjs.current.map((imgObj, i) => {
-      const movementInterval = (1 / gallery.length) * 1000,
+    imageAttrObjs.current = imageAttrObjs.current.map((imgObj, index) => {
+      const movementInterval = (1 / items.length) * 1000,
         opacityInterval = movementInterval / (1000 * 10);
 
       let newTranslateZ, newOpacity;
@@ -198,8 +183,8 @@ export default function Gallery() {
         opacity: newOpacity,
         top: imgObj.top,
         left: imgObj.left,
-        image: gallery[i],
-        imageIndex: i,
+        item: items[index],
+        imageIndex: index,
       };
     });
 
@@ -217,11 +202,11 @@ export default function Gallery() {
       return;
     }
 
-    imageAttrObjs.current = imageAttrObjs.current.map((imgObj, i) => {
-      const initialImgPos = (i / gallery.length) * (zMax.current * -1);
+    imageAttrObjs.current = imageAttrObjs.current.map((imgObj, index) => {
+      const initialImgPos = (index / items.length) * (zMax.current * -1);
       const newTranslateZ = initialImgPos + sliderVal;
 
-      const initialOpacity = 1 - i / gallery.length;
+      const initialOpacity = 1 - index / items.length;
       const newOpacity = initialOpacity + (1 * sliderVal) / zMax.current;
 
       return {
@@ -229,8 +214,8 @@ export default function Gallery() {
         opacity: newOpacity,
         top: imgObj.top,
         left: imgObj.left,
-        image: gallery[i],
-        imageIndex: i,
+        item: items[index],
+        imageIndex: index,
       };
     });
 
@@ -247,17 +232,16 @@ export default function Gallery() {
   };
 
   useEffect(() => {
-    // zMax.current = width * 10 > 10000 ? 10000 : width * 100;
-    zMax.current = width * 15;
+    zMax.current = width * 10 > 10000 ? 10000 : width * 10;
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
     window.addEventListener('resize', handleResize);
 
     return () => {
       cancelAnimationFrame(requestRef.current);
-      window.removeEventListener('resize');
+      window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [items]);
 
   const onWheel = e => {
     if (e.deltaY > 0 && zCurr.current <= 0) {
@@ -281,7 +265,7 @@ export default function Gallery() {
               transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
             }}
           >
-            <h1 className={styles.heading}>Selected Work</h1>
+            <h1 className={styles.heading}>Selected Projects</h1>
           </Tween>
         </div>
         <div className={styles.galleryContainer} ref={galleryRef}>
@@ -314,7 +298,12 @@ export default function Gallery() {
                     }}
                   >
                     <div className={styles.galleryImage}>
-                      <img src={gallery[i]} alt="hey" />
+                      <Image
+                        src={image.item.imageUrl.src}
+                        width={image.item.imageUrl.width}
+                        height={image.item.imageUrl.height}
+                        alt="hey"
+                      />
                     </div>
                   </Tween>
                 </div>
@@ -325,7 +314,7 @@ export default function Gallery() {
 
         {currentGalleryImage && (
           <div>
-            <p>{currentGalleryImage.image}</p>
+            <p>{currentGalleryImage.item.title}</p>
             <p>{currentGalleryImage.imageIndex}</p>
           </div>
         )}
@@ -337,7 +326,7 @@ export default function Gallery() {
             type="range"
             min="0"
             value={sliderVal}
-            max={((gallery.length - 1) / gallery.length) * zMax.current}
+            max={((items.length - 1) / items.length) * zMax.current}
             onChange={sliderZoom}
           />
         </div>

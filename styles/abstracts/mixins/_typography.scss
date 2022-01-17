@@ -1,1 +1,21 @@
-// This is where typography would go
+// h1
+@mixin h1() {
+  @include fluid-font($tween-start: 36px $mobile, $tween-end: 72px $desktop-lg);
+  font-family: $ff-sans;
+  line-height: $lh-heading;
+  font-weight: $fw-medium-sans;
+}
+
+// h4
+@mixin h4() {
+  @include fluid-font($tween-start: 17px $mobile, $tween-end: 18px $desktop-lg);
+  font-family: $ff-sans;
+  line-height: $lh-tight;
+  font-weight: $fw-medium-sans;
+}
+
+@mixin body-text {
+  @include fluid-font($tween-start: 17px $mobile, $tween-end: 18px $desktop-lg);
+  font-family: $ff-mono;
+  line-height: $lh-base;
+}

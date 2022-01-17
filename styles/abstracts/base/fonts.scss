@@ -8,3 +8,19 @@
     src: url($font-path + '.woff2') format('woff2'), url($font-path + '.woff') format('woff');
   }
 }
+
+// ---------------------------------------------------------------------------
+// Apercu Pro
+// ---------------------------------------------------------------------------
+
+@include font-face($family-name: Apercu, $file-name: Apercu/Apercu-Medium, $font-weight: 400);
+
+// ---------------------------------------------------------------------------
+// Inconsolata
+// ---------------------------------------------------------------------------
+
+@include font-face(
+  $family-name: Inconsolata,
+  $file-name: Inconsolata/Inconsolata-Regular,
+  $font-weight: 300
+);

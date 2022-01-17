@@ -27,7 +27,6 @@
 }
 
 .heading {
-  font-size: 5vw;
   width: 100%;
   text-align: center;
   -webkit-text-stroke: 1px $c-black;
@@ -46,13 +45,15 @@
   width: 100%;
 
   @include mq($tablet) {
-    @include absolute(x 0 x 0);
+    @include absolute(x x x 0);
+    width: calc(100% - 40px - $grid-spacing);
     height: calc(50vh - 2 * $grid-spacing);
     z-index: 20;
     cursor: pointer;
   }
 
   @include mq($desktop) {
+    width: calc(100% - 40px - 2 * $grid-spacing);
     height: calc(50vh - 4 * $grid-spacing);
   }
 }
@@ -83,7 +84,7 @@
   }
 
   @include mq($tablet-lg) {
-    width: 18%;
+    width: 40%;
   }
 }
 
@@ -91,15 +92,19 @@
   @include absolute(x 0 100px 0);
   @include margin(0 $grid-spacing-mobile);
   @include padding(0 $grid-spacing-mobile);
-  z-index: 50;
   width: 95vw;
 
   @include mq($tablet) {
+    @include absolute(15vh x x calc(100% - 40px - $grid-spacing));
     @include margin(0 $grid-spacing);
     @include padding(0 $grid-spacing);
+    transform: rotate(90deg);
+    width: 70vh;
+    -webkit-transform-origin: left top;
   }
 
   @include mq($desktop) {
+    @include absolute(15vh x x calc(100% - 40px - 2 * $grid-spacing));
     @include margin(0 2 * $grid-spacing);
   }
 }
