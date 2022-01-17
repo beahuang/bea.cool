@@ -1,6 +1,6 @@
 .gallery {
   perspective: 100vw;
-  width: 100vw;
+  width: 80vw;
   height: calc(100vh - 2 * $grid-spacing-mobile);
   position: relative;
   margin-left: -$grid-spacing-mobile;
@@ -76,6 +76,7 @@
 .galleryImage {
   position: absolute;
   max-width: 50vw;
+  -webkit-transform: translate3d(0, 0, 0);
 
   @include mq($tablet) {
     width: 50%;
@@ -83,7 +84,7 @@
   }
 
   @include mq($tablet-lg) {
-    width: 18%;
+    width: 25%;
   }
 }
 
