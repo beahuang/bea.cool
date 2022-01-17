@@ -252,12 +252,10 @@ export default function Gallery() {
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
     window.addEventListener('resize', handleResize);
-    window.addEventListener('deviceorientation', handleMobileTilt);
 
     return () => {
       cancelAnimationFrame(requestRef.current);
       window.removeEventListener('resize');
-      window.removeEventListener('deviceorientation');
     };
   }, []);
 
@@ -267,18 +265,6 @@ export default function Gallery() {
     } else if (e.deltaY < 0 && zCurr.current >= zStart.current) {
       zoom('minus');
     }
-  };
-
-  const handleMobileTilt = e => {
-    const TILT_MAX = 100;
-
-    const x = (e.gamma / 90) * TILT_MAX;
-    const y = (e.beta / 90) * TILT_MAX;
-
-    setImageTilt({
-      tiltX: x,
-      tiltY: y,
-    });
   };
 
   return (
