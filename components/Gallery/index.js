@@ -303,7 +303,7 @@ export default function Gallery({ items }) {
                         src={image.item.imageUrl.src}
                         width={image.item.imageUrl.width}
                         height={image.item.imageUrl.height}
-                        alt="hey"
+                        alt={image.item.altText}
                       />
                     </div>
                   </Tween>

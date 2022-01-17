@@ -79,6 +79,7 @@
   max-width: 50vw;
 
   @include mq($tablet) {
+    transform: translate(65%, 50%);
     width: 50%;
     max-width: inherit;
   }
