@@ -93,6 +93,10 @@
   width: $col-12;
   border-top: 1px solid #000000;
 
+  a {
+    display: inline-block;
+  }
+
   svg {
     display: inline;
     transition: all 0.1s $easeInQuad;

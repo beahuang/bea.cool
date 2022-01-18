@@ -5,7 +5,7 @@
 }
 
 .listContainer {
-  @include padding($spacing-xl x);
+  @include padding($spacing-lg x);
   position: relative;
   width: $col-12;
 

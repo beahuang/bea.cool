@@ -31,19 +31,37 @@
   display: flex;
   align-items: center;
   position: relative;
+  font-size: $fs-sm;
 
   button {
-    @include margin(x $spacing-sm x $spacing-md);
+    @include margin(x $spacing-xs x $spacing-sm);
     display: flex;
     align-items: center;
     position: relative;
     span {
-      margin-right: $spacing-sm;
+      margin-right: $spacing-xs;
+    }
+
+    svg {
+      width: 25px;
     }
   }
 
   &:first-of-type button {
     margin-left: 0;
+
+    svg {
+      width: 20px;
+    }
+  }
+
+  @include mq($tablet) {
+    font-size: $fs-base;
+    @include margin(x $spacing-sm x $spacing-md);
+
+    span {
+      margin-right: $spacing-sm;
+    }
   }
 }
 
