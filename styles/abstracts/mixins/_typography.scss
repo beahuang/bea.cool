@@ -4,6 +4,8 @@
   font-family: $ff-sans;
   line-height: $lh-heading;
   font-weight: $fw-bold-sans;
+  -webkit-text-stroke: 1px $c-black;
+  color: $c-white;
 }
 
 // h4

@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import { useWindowDimensions } from 'hooks';
 import { Tween } from 'react-gsap';
-import { getRandomInt } from 'utils';
 
 import { ItemDescription } from 'components';
+import { useWindowDimensions } from 'hooks';
+import { getRandomInt } from 'utils';
 import styles from './gallery.module.scss';
 
 export default function Gallery({ items }) {

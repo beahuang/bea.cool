@@ -7,6 +7,7 @@
   margin-bottom: $spacing-sm;
   height: $header-height;
   z-index: $z-index-nav;
+  justify-content: space-between;
 }
 
 .header--dark {
@@ -19,5 +20,41 @@
 
   @include mq($tablet) {
     @include padding(0 $grid-spacing);
+  }
+}
+
+.list {
+  display: flex;
+}
+
+.listItem {
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  button {
+    @include margin(x $spacing-sm x $spacing-md);
+    display: flex;
+    align-items: center;
+    position: relative;
+    span {
+      margin-right: $spacing-sm;
+    }
+  }
+
+  &:first-of-type button {
+    margin-left: 0;
+  }
+}
+
+.listActive {
+  &:after {
+    content: '';
+    display: block;
+    height: 4px;
+    background: black;
+    width: 100%;
+    position: absolute;
+    left: 0;
   }
 }

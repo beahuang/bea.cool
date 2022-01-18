@@ -21,7 +21,7 @@ const ImageTag = ({ image }) => (
   <Head>
     <meta property="og:image" content={image} key="og:image" />
     <meta property="twitter:image" content={image} key="twitter:image" />
-    <meta property="twitter:card" content="summary_large_image" key="twitter:card" />
+    <meta property="twitter:card" content="summary" key="twitter:card" />
   </Head>
 );
 

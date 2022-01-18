@@ -1,9 +1,10 @@
 import { ExternalArrow } from 'svgs';
+import { className } from 'utils';
 import styles from './itemDescription.module.scss';
 
-export default function ItemDescription({ item }) {
+export default function ItemDescription({ item, isList }) {
   return (
-    <div className={styles.container}>
+    <div {...className(styles.container, isList && styles.list)}>
       <div className={styles.content}>
         <h4 className={styles.title}>{item.title}</h4>
         <p className={styles.description}>{item.description}</p>

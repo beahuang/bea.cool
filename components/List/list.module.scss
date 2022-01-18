@@ -1,0 +1,48 @@
+.container {
+  perspective: 100vw;
+  margin: $header-height auto;
+  max-width: 1440px;
+}
+
+.listContainer {
+  @include padding($spacing-xl x);
+  position: relative;
+  width: $col-12;
+
+  @include mq($tablet) {
+    @include padding($spacing-xxxl x);
+
+    &:first-of-type {
+      margin-top: $spacing-xxxl;
+    }
+
+    &:nth-child(2n + 1) {
+      .listItem {
+        margin-left: $col-3;
+      }
+
+      .listImage {
+        @include absolute(0 x x 0);
+        text-align: left;
+      }
+    }
+  }
+}
+
+.listItem {
+  margin-top: calc(-1 * $spacing-md);
+
+  @include mq($tablet) {
+    width: $col-10;
+  }
+}
+
+.listImage {
+  text-align: center;
+
+  @include mq($tablet) {
+    @include absolute(0 0 x x);
+    text-align: right;
+    width: 50%;
+  }
+}

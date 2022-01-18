@@ -16,6 +16,11 @@
     flex-flow: row wrap;
     padding-right: 0;
   }
+
+  &.list {
+    @include relative(0 x x 0);
+    width: inherit;
+  }
 }
 
 .content {
