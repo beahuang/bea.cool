@@ -28,13 +28,14 @@
 }
 
 .listItem {
+  @include margin(x $spacing-xs x $spacing-sm);
   display: flex;
   align-items: center;
   position: relative;
   font-size: $fs-sm;
 
   button {
-    @include margin(x $spacing-xs x $spacing-sm);
+    @include padding(x $spacing-xs);
     display: flex;
     align-items: center;
     position: relative;
