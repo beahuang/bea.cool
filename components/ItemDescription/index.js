@@ -7,6 +7,16 @@ export default function ItemDescription({ item }) {
         <h4 className={styles.title}>{item.title}</h4>
         <p className={styles.description}>{item.description}</p>
       </div>
+      <ul className={styles.technologies}>
+        {item.technologies.map((tech, i) => (
+          <li className={styles.technology} key={i}>
+            <span>
+              {tech}
+              {i < item.technologies.length - 1 ? ', ' : ''}
+            </span>
+          </li>
+        ))}
+      </ul>
       <ul className={styles.links}>
         {item.liveSiteUrl && (
           <li className={styles.item}>

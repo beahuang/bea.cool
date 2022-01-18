@@ -1,6 +1,7 @@
 .container {
   @include absolute(calc($header-height + $spacing-sm) x x $col-1);
   @include grid-parent;
+  @include padding(0);
   flex-flow: column;
   align-items: flex-start;
   border: 1px solid $c-black;
@@ -18,7 +19,10 @@
 
 .content {
   @include grid-child;
-  width: $col-8;
+
+  @include mq($tablet) {
+    width: $col-8;
+  }
 }
 
 .title {
@@ -38,22 +42,46 @@
 }
 
 .links {
-  @include margin($spacing-xs x $spacing-sm);
   @include grid-parent;
-  width: $col-4;
+  @include margin(0);
+  @include padding(0);
+  flex-flow: row;
+  width: $col-12;
   justify-content: space-between;
   text-align: center;
 
   @include mq($tablet) {
     @include margin($spacing-xs x $spacing-lg);
     padding-left: 0;
+    width: $col-4;
   }
+}
+
+.technologies {
+  @include grid-parent;
+  width: $col-12;
+  font-size: $fs-xs;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+.technology {
+  @include padding($spacing-xs);
 }
 
 .item {
   @include padding($spacing-xs);
-  width: $col-5;
-  margin-left: $col-1;
+  @include margin(0);
+  width: $col-12;
+  border-top: 1px solid #000000;
+
+  &:nth-of-type(2) {
+    border-left: 1px solid black;
+  }
+
+  @include mq($tablet) {
+    border: none;
+  }
 
   &:hover {
     font-style: italic;
