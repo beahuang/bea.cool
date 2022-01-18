@@ -12,11 +12,17 @@ export default function List({ items }) {
   const [itemTilt, setItemTilt] = useState({
     tiltX: 0,
     tiltY: 0,
-    degree: 0,
   });
 
   const handleMouseMove = e => {
-    handleItemTilt(e);
+    if (width > 768) {
+      handleItemTilt(e);
+    } else {
+      setItemTilt({
+        tiltX: 0,
+        tiltY: 0,
+      });
+    }
   };
 
   const handleItemTilt = e => {
