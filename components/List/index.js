@@ -41,7 +41,7 @@ export default function List({ items }) {
 
   return (
     <section className={styles.container} onMouseMove={handleMouseMove}>
-      <h1 className={styles.heading}>Selected Work</h1>
+      <h1 className={styles.heading}>Selected Projects</h1>
       {items.map((item, i) => {
         return (
           <div className={styles.listContainer} key={i}>
