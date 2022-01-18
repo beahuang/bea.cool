@@ -1,16 +1,17 @@
 .container {
-  @include absolute(calc($header-height + $spacing-sm) x x $col-1);
+  @include absolute(calc($header-height + $spacing-sm) x x calc($col-1/2));
   @include grid-parent;
   @include padding(0);
   flex-flow: column;
   align-items: flex-start;
   border: 1px solid $c-black;
-  width: $col-10;
+  width: $col-11;
   z-index: $z-index-modal-content;
   background: $c-white;
 
   @include mq($tablet) {
     @include absolute(inherit x $spacing-md $col-1);
+    width: $col-10;
     align-items: flex-end;
     flex-flow: row wrap;
     padding-right: 0;
@@ -26,7 +27,7 @@
 }
 
 .title {
-  @include margin($spacing-sm x 0);
+  @include margin($spacing-md x 0);
 
   @include mq($tablet) {
     @include margin($spacing-lg x 0);
@@ -34,10 +35,13 @@
 }
 
 .description {
-  @include margin($spacing-xs x $spacing-sm);
+  @include margin($spacing-sm x $spacing-sm);
+  line-height: $lh-tighter;
+  letter-spacing: -0.1px;
 
   @include mq($tablet) {
-    @include margin($spacing-xs x $spacing-lg);
+    @include margin($spacing-xs x $spacing-sm);
+    line-height: $lh-base;
   }
 }
 
@@ -58,15 +62,24 @@
 }
 
 .technologies {
-  @include grid-parent;
+  display: flex;
   width: $col-12;
   font-size: $fs-xs;
   font-style: italic;
   margin-bottom: 10px;
+
+  @include mq($tablet) {
+    font-size: $fs-sm;
+    @include margin($spacing-lg x);
+  }
 }
 
 .technology {
   @include padding($spacing-xs);
+
+  &:first-of-type {
+    padding-left: 0;
+  }
 }
 
 .item {
@@ -75,15 +88,25 @@
   width: $col-12;
   border-top: 1px solid #000000;
 
+  svg {
+    display: inline;
+    transition: all 0.1s $easeInQuad;
+    transform: translate(0, 3px);
+  }
+
   &:nth-of-type(2) {
     border-left: 1px solid black;
   }
 
   @include mq($tablet) {
-    border: none;
+    border: none !important;
   }
 
   &:hover {
     font-style: italic;
+
+    svg {
+      transform: translate(3px, -3px);
+    }
   }
 }

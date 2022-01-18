@@ -1,6 +1,15 @@
+import styles from './externalArrow.module.scss';
+
 export default function ExternalArrow() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 18 18"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={styles.arrow}
+    >
       <path
         d="M6.99862 10.3755L6.91023 10.4639L6.99862 10.5523L7.46955 11.0232L7.55793 11.1116L7.64632 11.0232L15.7412 2.9283L15.8296 2.83992L15.7412 2.75153L15.2703 2.2806L15.1819 2.19221L15.0935 2.2806L6.99862 10.3755Z"
         fill="currentColor"

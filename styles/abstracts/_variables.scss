@@ -17,10 +17,11 @@ $ff-serif-stack: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, 
 $ff-mono-stack: Menlo, Consolas, Monaco, Liberation Mono, Lucida Console, monospace;
 
 // Typefaces
-$ff-sans: Apercu, $ff-sans-stack;
+$ff-sans: ApercuPro, $ff-sans-stack;
 $ff-mono: Inconsolata, $ff-mono-stack;
 
 // Font Weights
+$fw-bold-sans: 700;
 $fw-medium-sans: 400;
 $fw-regular-mono: 300;
 

@@ -1,17 +1,17 @@
 // h1
 @mixin h1() {
-  @include fluid-font($tween-start: 36px $mobile, $tween-end: 72px $desktop-lg);
+  @include fluid-font($tween-start: 36px $mobile, $tween-end: 100px $desktop-lg);
   font-family: $ff-sans;
   line-height: $lh-heading;
-  font-weight: $fw-medium-sans;
+  font-weight: $fw-bold-sans;
 }
 
 // h4
 @mixin h4() {
-  @include fluid-font($tween-start: 17px $mobile, $tween-end: 18px $desktop-lg);
+  @include fluid-font($tween-start: 17px $mobile, $tween-end: 24px $desktop-lg);
   font-family: $ff-sans;
   line-height: $lh-tight;
-  font-weight: $fw-medium-sans;
+  font-weight: $fw-bold-sans;
 }
 
 @mixin body-text {

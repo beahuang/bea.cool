@@ -15,6 +15,12 @@
 
 @include font-face($family-name: Apercu, $file-name: Apercu/Apercu-Medium, $font-weight: 400);
 
+@include font-face(
+  $family-name: ApercuPro,
+  $file-name: ApercuPro/ApercuPro-Bold,
+  $font-weight: 700
+);
+
 // ---------------------------------------------------------------------------
 // Inconsolata
 // ---------------------------------------------------------------------------
