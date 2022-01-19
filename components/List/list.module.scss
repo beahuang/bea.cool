@@ -18,7 +18,11 @@
 
     &:nth-child(2n + 1) {
       .listItem {
-        margin-left: $col-3;
+        margin-left: 5%;
+
+        @include mq($desktop) {
+          margin-left: 12.5%;
+        }
       }
 
       .listImage {
@@ -33,7 +37,11 @@
   margin-top: calc(-1 * $spacing-md);
 
   @include mq($tablet) {
-    width: $col-10;
+    width: 90%;
+  }
+
+  @include mq($desktop) {
+    width: 85%;
   }
 }
 

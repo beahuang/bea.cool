@@ -1,9 +1,9 @@
 :focus {
   outline: $focus-outline;
+}
 
-  &:not([data-focus-visible-added]) {
-    @include hide-outline;
-  }
+:focus:not(:focus-visible) {
+  @include hide-outline;
 }
 
 .sr-only {

@@ -27,7 +27,7 @@
   @include grid-child;
 
   @include mq($tablet) {
-    width: $col-8;
+    width: $col-7;
   }
 }
 
@@ -62,7 +62,14 @@
   @include mq($tablet) {
     @include margin($spacing-xs x $spacing-lg);
     padding-left: 0;
-    width: $col-4;
+    width: $col-5;
+    text-align: right;
+  }
+
+  @include mq($tablet, $desktop) {
+    .list & {
+      flex-flow: row wrap;
+    }
   }
 }
 
@@ -94,6 +101,7 @@
   border-top: 1px solid #000000;
 
   a {
+    @include padding(x $spacing-xs);
     display: inline-block;
   }
 

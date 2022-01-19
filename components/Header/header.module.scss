@@ -34,6 +34,22 @@
   position: relative;
   font-size: $fs-sm;
 
+  &:after {
+    @include absolute(x x calc(50% - 3px) 0);
+    @include size(100%, 3px);
+    content: '';
+    display: block;
+    background: $c-black;
+    transition: all 0.1s $easeInQuad;
+  }
+
+  &.listActive,
+  &:hover {
+    &:after {
+      bottom: 0px;
+    }
+  }
+
   button {
     @include padding(x $spacing-xs);
     display: flex;
@@ -63,17 +79,5 @@
     span {
       margin-right: $spacing-sm;
     }
-  }
-}
-
-.listActive {
-  &:after {
-    content: '';
-    display: block;
-    height: 4px;
-    background: black;
-    width: 100%;
-    position: absolute;
-    left: 0;
   }
 }
