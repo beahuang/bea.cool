@@ -72,22 +72,29 @@ export default function Gallery({ items }) {
     let randomTop = 0,
       randomLeft = 0;
 
+    const yOffset = windowWidth < 768 ? 250 : 200;
+    const XOffset = windowWidth < 768 ? 0 : 150;
+
     switch (quadrant) {
+      // top left
       case 0:
-        randomTop = getRandomInt(0, bottomBound / 2);
-        randomLeft = getRandomInt(0, rightBound / 2);
+        randomTop = getRandomInt(yOffset, bottomBound / 2);
+        randomLeft = getRandomInt(XOffset, rightBound / 2);
         break;
+      // top right
       case 1:
-        randomTop = getRandomInt(0, bottomBound / 2);
-        randomLeft = getRandomInt(rightBound / 2, rightBound);
+        randomTop = getRandomInt(yOffset, bottomBound / 2);
+        randomLeft = getRandomInt(rightBound / 2, rightBound - XOffset);
         break;
+      // bottom right
       case 2:
-        randomTop = getRandomInt(bottomBound / 2, bottomBound);
-        randomLeft = getRandomInt(rightBound / 2, rightBound);
+        randomTop = getRandomInt(bottomBound / 2, bottomBound - yOffset);
+        randomLeft = getRandomInt(rightBound / 2, rightBound - XOffset);
         break;
+      // bottom left
       case 3:
-        randomTop = getRandomInt(bottomBound / 2, bottomBound);
-        randomLeft = getRandomInt(0, rightBound / 2);
+        randomTop = getRandomInt(bottomBound / 2, bottomBound - yOffset);
+        randomLeft = getRandomInt(XOffset, rightBound / 2);
         break;
     }
 
@@ -233,7 +240,7 @@ export default function Gallery({ items }) {
   };
 
   useEffect(() => {
-    zMax.current = windowWidth * 10 > 10000 ? 10000 : windowWidth * 10;
+    zMax.current = windowWidth * 10 > 10000 ? 15000 : windowWidth * 10;
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
     window.addEventListener('resize', handleResize);
