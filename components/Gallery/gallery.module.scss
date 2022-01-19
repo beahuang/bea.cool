@@ -23,7 +23,7 @@
   position: relative;
   top: 50%;
   transform: translateY(calc(-50% - $header-height/2));
-  z-index: 10;
+  z-index: -1;
 }
 
 .heading {
@@ -45,14 +45,13 @@
   @include mq($tablet-lg) {
     @include absolute(x x x 0);
     width: calc(100% - 40px - $grid-spacing);
-    height: calc(50vh - 2 * $grid-spacing);
+    height: 50vh;
     z-index: 20;
     cursor: pointer;
   }
 
   @include mq($desktop) {
     width: calc(100% - 40px - 2 * $grid-spacing);
-    height: calc(50vh - 4 * $grid-spacing);
   }
 }
 
@@ -83,7 +82,7 @@
   }
 
   @include mq($desktop) {
-    width: 30%;
+    width: 25%;
   }
 }
 

@@ -72,7 +72,7 @@ export default function Gallery({ items }) {
     let randomTop = 0,
       randomLeft = 0;
 
-    const yOffset = windowWidth < 768 ? 250 : 200;
+    const yOffset = windowWidth < 768 ? 250 : 150;
     const XOffset = windowWidth < 768 ? 0 : 150;
 
     switch (quadrant) {
@@ -88,12 +88,12 @@ export default function Gallery({ items }) {
         break;
       // bottom right
       case 2:
-        randomTop = getRandomInt(bottomBound / 2, bottomBound - yOffset);
+        randomTop = getRandomInt(bottomBound / 2, bottomBound / 2 + yOffset);
         randomLeft = getRandomInt(rightBound / 2, rightBound - XOffset);
         break;
       // bottom left
       case 3:
-        randomTop = getRandomInt(bottomBound / 2, bottomBound - yOffset);
+        randomTop = getRandomInt(bottomBound / 2, bottomBound / 2 + yOffset);
         randomLeft = getRandomInt(XOffset, rightBound / 2);
         break;
     }
@@ -240,7 +240,7 @@ export default function Gallery({ items }) {
   };
 
   useEffect(() => {
-    zMax.current = windowWidth * 10 > 10000 ? 15000 : windowWidth * 10;
+    zMax.current = windowWidth * 10 > 10000 ? 20000 : windowWidth * 10;
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
     window.addEventListener('resize', handleResize);
@@ -267,15 +267,6 @@ export default function Gallery({ items }) {
         </section>
       )}
       <section className={styles.gallery} onMouseMove={handleMouseMove} onWheelCapture={onWheel}>
-        <div className={styles.headingContainer} ref={titleRef}>
-          <Tween
-            to={{
-              transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
-            }}
-          >
-            <h1 className={styles.heading}>Selected Projects</h1>
-          </Tween>
-        </div>
         <div className={styles.galleryContainer} ref={galleryRef}>
           <button
             className={styles.zoomIn}
@@ -327,6 +318,16 @@ export default function Gallery({ items }) {
               );
             })}
           </div>
+        </div>
+
+        <div className={styles.headingContainer} ref={titleRef}>
+          <Tween
+            to={{
+              transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
+            }}
+          >
+            <h1 className={styles.heading}>Selected Projects</h1>
+          </Tween>
         </div>
 
         {currentGalleryImage && <ItemDescription item={currentGalleryImage.item} />}
