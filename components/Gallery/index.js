@@ -154,7 +154,7 @@ export default function Gallery({ items }) {
     window.requestAnimationFrame(animate);
 
     if (zoomDirection.current === 'IN') {
-      if (zCurr.current < 0) {
+      if (zCurr.current <= 0) {
         zoom('plus');
       } else {
         window.cancelAnimationFrame(animate);

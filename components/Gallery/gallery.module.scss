@@ -23,7 +23,6 @@
   position: relative;
   top: 50%;
   transform: translateY(calc(-50% - $header-height/2));
-  z-index: -1;
 }
 
 .heading {

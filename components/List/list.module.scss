@@ -11,9 +11,10 @@
 
   @include mq($tablet-lg) {
     @include padding($spacing-xxxl x);
+    @include margin($spacing-xxxl x);
 
     &:first-of-type {
-      margin-top: $spacing-xxxl;
+      margin-top: 2 * $spacing-xxxl;
     }
 
     &:nth-child(2n + 1) {
@@ -21,12 +22,12 @@
         margin-left: 5%;
 
         @include mq($desktop) {
-          margin-left: 12.5%;
+          margin-left: 25%;
         }
       }
 
       .listImage {
-        @include absolute(0 x x 0);
+        @include absolute(-20% x x 0);
         text-align: left;
       }
     }
@@ -49,7 +50,7 @@
   text-align: center;
 
   @include mq($tablet-lg) {
-    @include absolute(0 0 x x);
+    @include absolute(-20% 0 x x);
     text-align: right;
     width: 50%;
   }
