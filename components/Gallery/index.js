@@ -53,6 +53,7 @@ export default function Gallery({ items }) {
     });
 
     zStart.current = imageAttrObjs.current[totalImages - 1].translateZ;
+    zCurr.current = imageAttrObjs.current[totalImages - 1].translateZ;
     setIsLoading(false);
   };
 
@@ -153,14 +154,16 @@ export default function Gallery({ items }) {
   const animate = () => {
     window.requestAnimationFrame(animate);
 
+    const percentage = Math.abs(zStart.current - zCurr.current) / zMax.current;
+
     if (zoomDirection.current === 'IN') {
-      if (zCurr.current <= 0) {
+      if (percentage >= 0 && percentage < 0.95) {
         zoom('plus');
       } else {
         window.cancelAnimationFrame(animate);
       }
     } else if (zoomDirection.current === 'OUT') {
-      if (zCurr.current > zStart.current) {
+      if (0 < percentage && percentage <= 0.95) {
         zoom('minus');
       } else {
         window.cancelAnimationFrame(animate);
