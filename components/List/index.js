@@ -54,9 +54,9 @@ export default function List({ items }) {
             >
               <div className={styles.listImage}>
                 <Image
-                  src={item.imageUrl.src}
-                  width={item.imageUrl.width}
-                  height={item.imageUrl.height}
+                  src={item.image.src}
+                  width={item.image.width}
+                  height={item.image.height}
                   alt={item.altText}
                 />
               </div>

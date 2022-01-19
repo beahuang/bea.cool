@@ -18,7 +18,7 @@
   @include padding(0 $grid-spacing-mobile);
   font-size: 30px;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include padding(0 $grid-spacing);
   }
 }
@@ -72,7 +72,7 @@
     }
   }
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     font-size: $fs-base;
     @include margin(x $spacing-sm x $spacing-md);
 

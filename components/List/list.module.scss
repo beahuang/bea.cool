@@ -9,7 +9,7 @@
   position: relative;
   width: $col-12;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include padding($spacing-xxxl x);
 
     &:first-of-type {
@@ -36,7 +36,7 @@
 .listItem {
   margin-top: calc(-1 * $spacing-md);
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     width: 90%;
   }
 
@@ -48,7 +48,7 @@
 .listImage {
   text-align: center;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include absolute(0 0 x x);
     text-align: right;
     width: 50%;

@@ -10,7 +10,7 @@ import { getRandomInt } from 'utils';
 import styles from './gallery.module.scss';
 
 export default function Gallery({ items }) {
-  const { height, width } = useWindowDimensions();
+  const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const sliderRef = useRef();
   const titleRef = useRef();
   const galleryRef = useRef();
@@ -38,8 +38,7 @@ export default function Gallery({ items }) {
     const totalImages = items.length;
 
     imageAttrObjs.current = items.map((item, index) => {
-      // TODO: this should be item height, width
-      const posObj = calculatePosition(index, 300, 450);
+      const posObj = calculatePosition(index, item.image.height, item.image.width);
 
       return {
         translateZ: (index / totalImages) * (zMax.current * -1),
@@ -61,14 +60,21 @@ export default function Gallery({ items }) {
   };
 
   const calculatePosition = (index, height, width) => {
+    // if (windowWidth < 768) {
+    // } else {
+    // }
+    console.log(height, width);
     const quadrant = index % 4;
     const { height: galleryHeight, width: galleryWidth } =
       galleryRef.current.getBoundingClientRect();
 
     const bottomBound = galleryHeight - height,
-      rightBound = galleryWidth - width,
-      randomTop = 0,
+      rightBound = galleryWidth - width;
+
+    let randomTop = 0,
       randomLeft = 0;
+
+    console.log(bottomBound, rightBound);
 
     switch (quadrant) {
       case 0:
@@ -103,10 +109,10 @@ export default function Gallery({ items }) {
   const handleImageTilt = e => {
     const TILT_POWER = 30;
 
-    const cx = Math.ceil(width / 2),
-      cy = Math.ceil(height / 2),
-      tiltX = (e.clientX - cx) / (width / TILT_POWER),
-      tiltY = (e.clientY - cy) / (width / TILT_POWER);
+    const cx = Math.ceil(windowWidth / 2),
+      cy = Math.ceil(windowHeight / 2),
+      tiltX = (e.clientX - cx) / (windowWidth / TILT_POWER),
+      tiltY = (e.clientY - cy) / (windowWidth / TILT_POWER);
 
     setImageTilt({
       tiltX,
@@ -117,8 +123,8 @@ export default function Gallery({ items }) {
   const handleTitleTilt = e => {
     const TILT_POWER = 30;
 
-    const cx = Math.ceil(width / 2),
-      cy = Math.ceil(height / 2),
+    const cx = Math.ceil(windowWidth / 2),
+      cy = Math.ceil(windowHeight / 2),
       dx = e.pageX - cx,
       dy = e.pageY - cy,
       tiltX = dy / cy,
@@ -233,7 +239,7 @@ export default function Gallery({ items }) {
   };
 
   useEffect(() => {
-    zMax.current = width * 10 > 10000 ? 10000 : width * 10;
+    zMax.current = windowWidth * 10 > 10000 ? 10000 : windowWidth * 10;
     setUpGallery();
     requestRef.current = requestAnimationFrame(animate);
     window.addEventListener('resize', handleResize);
@@ -300,9 +306,9 @@ export default function Gallery({ items }) {
                   >
                     <div className={styles.galleryImage}>
                       <Image
-                        src={image.item.imageUrl.src}
-                        width={image.item.imageUrl.width}
-                        height={image.item.imageUrl.height}
+                        src={image.item.image.src}
+                        width={image.item.image.width}
+                        height={image.item.image.height}
                         alt={image.item.altText}
                       />
                     </div>

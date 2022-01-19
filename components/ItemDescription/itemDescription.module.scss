@@ -9,7 +9,7 @@
   z-index: $z-index-modal-content;
   background: $c-white;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include absolute(inherit x $spacing-md $col-1);
     width: $col-10;
     align-items: flex-end;
@@ -26,7 +26,7 @@
 .content {
   @include grid-child;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     width: $col-7;
   }
 }
@@ -34,7 +34,7 @@
 .title {
   @include margin($spacing-md x 0);
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include margin($spacing-lg x 0);
   }
 }
@@ -44,7 +44,7 @@
   line-height: $lh-tighter;
   letter-spacing: -0.1px;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include margin($spacing-xs x $spacing-sm);
     line-height: $lh-base;
   }
@@ -59,14 +59,14 @@
   justify-content: space-between;
   text-align: center;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include margin($spacing-xs x $spacing-lg);
     padding-left: 0;
     width: $col-5;
     text-align: right;
   }
 
-  @include mq($tablet, $desktop) {
+  @include mq($tablet-lg, $desktop) {
     .list & {
       flex-flow: row wrap;
     }
@@ -80,7 +80,7 @@
   font-style: italic;
   margin-bottom: 10px;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     font-size: $fs-sm;
     @include margin($spacing-lg x);
   }
@@ -115,7 +115,7 @@
     border-left: 1px solid black;
   }
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     border: none !important;
   }
 

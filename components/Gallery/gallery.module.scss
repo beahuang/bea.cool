@@ -6,7 +6,7 @@
   margin-left: -$grid-spacing-mobile;
   overflow: hidden;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     width: 100vw;
     height: calc(100vh - 2 * $grid-spacing);
     margin-left: -$grid-spacing;
@@ -42,7 +42,7 @@
 .zoomOut {
   width: 100%;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include absolute(x x x 0);
     width: calc(100% - 40px - $grid-spacing);
     height: calc(50vh - 2 * $grid-spacing);
@@ -74,16 +74,16 @@
 
 .galleryImage {
   position: absolute;
-  max-width: 50vw;
+  // max-width: 50vw;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     transform: translate(65%, 50%);
-    width: 50%;
+    // width: 50%;
     max-width: inherit;
   }
 
   @include mq($tablet-lg) {
-    width: 40%;
+    // width: 40%;
   }
 }
 
@@ -93,7 +93,7 @@
   @include padding(0 $grid-spacing-mobile);
   width: 95vw;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     @include absolute(15vh x x calc(100% - 40px - $grid-spacing));
     @include margin(0 $grid-spacing);
     @include padding(0 $grid-spacing);
@@ -140,7 +140,7 @@
     margin-top: -20px;
   }
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     &:hover {
       outline: 0;
     }
