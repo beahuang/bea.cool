@@ -74,16 +74,16 @@
 
 .galleryImage {
   position: absolute;
-  // max-width: 50vw;
+  max-width: 80%;
 
   @include mq($tablet-lg) {
     transform: translate(65%, 50%);
-    // width: 50%;
+    width: 50%;
     max-width: inherit;
   }
 
-  @include mq($tablet-lg) {
-    // width: 40%;
+  @include mq($desktop) {
+    width: 30%;
   }
 }
 

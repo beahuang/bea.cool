@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Tween } from 'react-gsap';
 
-import { ItemDescription, ToolTip } from 'components';
-import { useWindowDimensions } from 'hooks';
+import { ItemDescription } from 'components';
+import { useArrayRef, useWindowDimensions } from 'hooks';
 import { getRandomInt } from 'utils';
 import styles from './gallery.module.scss';
 
@@ -20,6 +20,7 @@ export default function Gallery({ items }) {
   const zMax = useRef(0);
   const zStart = useRef(0);
   const zCurr = useRef(0);
+  const [imageRefs, setImageRefs] = useArrayRef();
 
   const [isLoading, setIsLoading] = useState(true);
   const [currentGalleryImage, setCurrentGalleryImage] = useState();
@@ -38,7 +39,8 @@ export default function Gallery({ items }) {
     const totalImages = items.length;
 
     imageAttrObjs.current = items.map((item, index) => {
-      const posObj = calculatePosition(index, item.image.height, item.image.width);
+      const image = imageRefs.current[index];
+      const posObj = calculatePosition(index, image);
 
       return {
         translateZ: (index / totalImages) * (zMax.current * -1),
@@ -47,7 +49,6 @@ export default function Gallery({ items }) {
         top: posObj.top,
         left: posObj.left,
         item: items[index],
-        imageIndex: index,
       };
     });
 
@@ -59,22 +60,17 @@ export default function Gallery({ items }) {
     setUpGallery();
   };
 
-  const calculatePosition = (index, height, width) => {
-    // if (windowWidth < 768) {
-    // } else {
-    // }
-    console.log(height, width);
+  const calculatePosition = (index, image) => {
     const quadrant = index % 4;
+    const { height: imageHeight, width: imageWidth } = image.getBoundingClientRect();
     const { height: galleryHeight, width: galleryWidth } =
       galleryRef.current.getBoundingClientRect();
 
-    const bottomBound = galleryHeight - height,
-      rightBound = galleryWidth - width;
+    const bottomBound = galleryHeight - imageHeight,
+      rightBound = galleryWidth - imageWidth;
 
     let randomTop = 0,
       randomLeft = 0;
-
-    console.log(bottomBound, rightBound);
 
     switch (quadrant) {
       case 0:
@@ -191,7 +187,6 @@ export default function Gallery({ items }) {
         top: imgObj.top,
         left: imgObj.left,
         item: items[index],
-        imageIndex: index,
       };
     });
 
@@ -222,7 +217,6 @@ export default function Gallery({ items }) {
         top: imgObj.top,
         left: imgObj.left,
         item: items[index],
-        imageIndex: index,
       };
     });
 
@@ -287,35 +281,44 @@ export default function Gallery({ items }) {
             onMouseDown={() => handleMouseDown('OUT')}
           ></button>
           <div className={styles.imageContainer}>
-            {imageAttrObjs.current.map((image, i) => (
-              <Tween
-                to={{
-                  transform: `translate3d(${image.left}px, ${image.top}px, ${image.translateZ}px)`,
-                  opacity: image.opacity,
-                  zIndex: image.zIndex,
-                  position: 'relative',
-                }}
-                key={i}
-              >
-                <div>
-                  <Tween
-                    to={{
-                      x: imageTilt.tiltX * (i + 1),
-                      y: imageTilt.tiltY * (i + 1),
-                    }}
-                  >
-                    <div className={styles.galleryImage}>
-                      <Image
-                        src={image.item.image.src}
-                        width={image.item.image.width}
-                        height={image.item.image.height}
-                        alt={image.item.altText}
-                      />
-                    </div>
-                  </Tween>
-                </div>
-              </Tween>
-            ))}
+            {items.map((item, i) => {
+              const transObj = imageAttrObjs.current[i] ?? {
+                translateZ: 0,
+                opacity: 0,
+                top: 'inherit',
+                left: 'inherit',
+              };
+
+              return (
+                <Tween
+                  to={{
+                    transform: `translate3d(${transObj.left}px, ${transObj.top}px, ${transObj.translateZ}px)`,
+                    opacity: transObj.opacity,
+                    zIndex: transObj.zIndex,
+                    position: 'relative',
+                  }}
+                  key={i}
+                >
+                  <div>
+                    <Tween
+                      to={{
+                        x: imageTilt.tiltX * (i + 1),
+                        y: imageTilt.tiltY * (i + 1),
+                      }}
+                    >
+                      <div className={styles.galleryImage} ref={setImageRefs(i)}>
+                        <Image
+                          src={item.image.src}
+                          width={item.image.width}
+                          height={item.image.height}
+                          alt={item.altText}
+                        />
+                      </div>
+                    </Tween>
+                  </div>
+                </Tween>
+              );
+            })}
           </div>
         </div>
 
