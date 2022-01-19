@@ -154,13 +154,13 @@ export default function Gallery({ items }) {
     window.requestAnimationFrame(animate);
 
     if (zoomDirection.current === 'IN') {
-      if (zCurr.current <= 0) {
+      if (zCurr.current < 0) {
         zoom('plus');
       } else {
         window.cancelAnimationFrame(animate);
       }
     } else if (zoomDirection.current === 'OUT') {
-      if (zCurr.current >= zStart.current) {
+      if (zCurr.current > zStart.current) {
         zoom('minus');
       } else {
         window.cancelAnimationFrame(animate);
@@ -232,9 +232,12 @@ export default function Gallery({ items }) {
   };
 
   const getGalleryImageInView = () => {
-    const currentInView = imageAttrObjs.current.find(x => {
-      return 1100 > x.translateZ && x.translateZ >= 0;
-    });
+    const progressPercentage =
+      zCurr.current === 0 ? 0 : Math.abs(zStart.current - zCurr.current) / zMax.current;
+    const currentIndex =
+      progressPercentage > 0.86 ? items.length - 1 : Math.floor(progressPercentage / 0.1);
+
+    const currentInView = imageAttrObjs.current[currentIndex];
 
     return currentInView;
   };
