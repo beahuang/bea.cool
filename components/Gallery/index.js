@@ -334,6 +334,13 @@ export default function Gallery({ items }) {
             max={((items.length - 1) / items.length) * zMax.current}
             onChange={sliderZoom}
           />
+          <div className={styles.sliderTicks}>
+            {items.map((item, i) => (
+              <span className={styles.tick} key={i}>
+                &mdash;
+              </span>
+            ))}
+          </div>
         </div>
       </section>
     </>
