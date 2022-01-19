@@ -35,8 +35,8 @@
   font-size: $fs-sm;
 
   &:after {
-    @include absolute(x x calc(50% - 3px) 0);
-    @include size(100%, 3px);
+    @include absolute(x x calc(50% - 1px) 0);
+    @include size(100%, 1px);
     content: '';
     display: block;
     background: $c-black;

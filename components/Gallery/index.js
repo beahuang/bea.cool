@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Tween } from 'react-gsap';
 
-import { ItemDescription } from 'components';
+import { ItemDescription, ToolTip } from 'components';
 import { useWindowDimensions } from 'hooks';
 import { getRandomInt } from 'utils';
 import styles from './gallery.module.scss';

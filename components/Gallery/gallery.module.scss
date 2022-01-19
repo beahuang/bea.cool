@@ -57,12 +57,12 @@
 }
 
 .zoomIn {
-  cursor: zoom-in;
+  cursor: url(/cursor/zoom-in.png) 20 20, zoom-in;
 }
 
 .zoomOut {
   bottom: 0;
-  cursor: zoom-out;
+  cursor: url(/cursor/zoom-out.png) 20 20, zoom-out;
 }
 
 .imageContainer {

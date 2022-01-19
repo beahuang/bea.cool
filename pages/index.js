@@ -1,15 +1,15 @@
 import { Gallery, List } from 'components';
 
-import mobileAppImage from 'public/img/mobile-app.jpg';
-import solugenImage from 'public/img/solugen.jpg';
-import pbsNewshour from 'public/img/pbs-newshour.jpg';
-import arnoldArboretumImage from 'public/img/arnold-arboretum.jpg';
-import michelleWuImage from 'public/img/michelle-wu.jpg';
-import sasakiImage from 'public/img/sasaki.jpg';
+import mobileAppImage from 'public/img/mobile-app.png';
+import solugenImage from 'public/img/solugen.jpeg';
+import pbsNewshour from 'public/img/pbs-newshour.png';
+import arnoldArboretumImage from 'public/img/arboretum.png';
+import michelleWuImage from 'public/img/michelle-wu.png';
+import sasakiImage from 'public/img/sasaki.png';
 import sportsInnovationImage from 'public/img/sports-innovation-lab.jpg';
-import designtexImage from 'public/img/designtex.jpg';
-import devotedHealthImage from 'public/img/devoted-health.jpg';
-import emergenceCapitalImage from 'public/img/emergence-capital.jpg';
+import designtexImage from 'public/img/designtex.png';
+import devotedHealthImage from 'public/img/devoted-health.png';
+import emergenceCapitalImage from 'public/img/emergence-capital.png';
 
 const projects = [
   {

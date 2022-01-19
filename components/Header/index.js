@@ -6,7 +6,7 @@ export default function Header({ theme, view, setView }) {
   return (
     <header {...className(styles.header, theme === 'dark' && styles['header--dark'])}>
       <div className={styles.logo}>
-        <p>🐝🧊</p>
+        <p>🐝</p>
         <h1 className="visually-hidden">Logo</h1>
       </div>
       <ul className={styles.list}>
