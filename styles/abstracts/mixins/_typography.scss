@@ -3,12 +3,14 @@
   @include fluid-font($tween-start: 36px $mobile, $tween-end: 100px $desktop-lg);
   font-family: $ff-sans;
   line-height: $lh-heading;
-  font-weight: $fw-bold-sans;
+  font-weight: $fw-medium-sans;
   -webkit-text-stroke: 1px $c-black;
+  letter-spacing: 1px;
   color: $c-white;
 
   @include mq($tablet) {
-    -webkit-text-stroke: 2px $c-black;
+    letter-spacing: 3px;
+    -webkit-text-stroke: 1.5px $c-black;
   }
 }
 
@@ -17,7 +19,7 @@
   @include fluid-font($tween-start: 17px $mobile, $tween-end: 24px $desktop-lg);
   font-family: $ff-sans;
   line-height: $lh-tight;
-  font-weight: $fw-bold-sans;
+  font-weight: $fw-medium-sans;
 }
 
 @mixin body-text {
