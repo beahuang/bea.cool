@@ -7,6 +7,7 @@ import { Tween } from 'react-gsap';
 import { ItemDescription } from 'components';
 import { useArrayRef, useWindowDimensions } from 'hooks';
 import { getRandomInt } from 'utils';
+import blurImage from 'public/img/blur.png';
 import styles from './gallery.module.scss';
 
 export default function Gallery({ items }) {
@@ -316,6 +317,9 @@ export default function Gallery({ items }) {
                           width={item.image.width}
                           height={item.image.height}
                           alt={item.altText}
+                          priority={i < 4}
+                          placeholder="blur"
+                          blurDataURL={blurImage.src}
                         />
                       </div>
                     </Tween>
