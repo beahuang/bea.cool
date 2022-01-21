@@ -1,5 +1,5 @@
 $duration-mobile: 15s;
-$duration: 20s;
+$duration: 30s;
 
 @-webkit-keyframes ticker {
   0% {
@@ -46,7 +46,6 @@ $duration: 20s;
 
 .text {
   display: inline-block;
-  font-family: $ff-sans;
   font-style: italic;
   font-size: $fs-sm;
   padding-top: 8px;
