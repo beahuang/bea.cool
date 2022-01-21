@@ -1,4 +1,4 @@
-$duration: 20s;
+$duration: 18s;
 
 @-webkit-keyframes ticker {
   0% {
@@ -40,13 +40,22 @@ $duration: 20s;
 }
 
 .text {
+  display: inline-block;
   font-family: $ff-sans;
   font-style: italic;
   font-size: $fs-sm;
   padding-top: 8px;
 
+  span {
+    margin-right: $spacing-lg;
+  }
+
   @include mq($tablet-lg) {
     font-size: $fs-base;
-    padding-top: 5px;
+    padding-top: 6px;
+
+    span {
+      margin-right: $spacing-xxxl;
+    }
   }
 }
