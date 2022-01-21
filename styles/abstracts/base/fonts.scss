@@ -31,6 +31,12 @@
   $font-weight: 400
 );
 
+@include font-face(
+  $family-name: RightGrotesk,
+  $file-name: RightGrotesk/RightGrotesk-Medium,
+  $font-weight: 300
+);
+
 // ---------------------------------------------------------------------------
 // Inconsolata
 // ---------------------------------------------------------------------------

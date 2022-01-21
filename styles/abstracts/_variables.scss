@@ -21,7 +21,8 @@ $ff-mono: Inconsolata, $ff-mono-stack;
 
 // Font Weights
 $fw-bold-sans: 700;
-$fw-medium-sans: 400;
+$fw-wide-medium-sans: 400;
+$fw-medium-sans: 300;
 $fw-regular-mono: 300;
 
 // Font Sizes
@@ -91,7 +92,9 @@ $desktop: 1024px;
 $desktop-lg: 1440px;
 
 // Header
-$header-height: 100px;
+$nav-height: 100px;
+$header-height: 140px;
+$ticker-height: 40px;
 
 // Transitions
 $transition-primary: all 150ms ease-in-out;

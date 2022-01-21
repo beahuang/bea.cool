@@ -3,7 +3,7 @@
   @include fluid-font($tween-start: 36px $mobile, $tween-end: 100px $desktop-lg);
   font-family: $ff-sans;
   line-height: $lh-heading;
-  font-weight: $fw-medium-sans;
+  font-weight: $fw-wide-medium-sans;
   -webkit-text-stroke: 1px $c-black;
   letter-spacing: 1px;
   color: $c-white;
@@ -19,7 +19,7 @@
   @include fluid-font($tween-start: 17px $mobile, $tween-end: 24px $desktop-lg);
   font-family: $ff-sans;
   line-height: $lh-tight;
-  font-weight: $fw-medium-sans;
+  font-weight: $fw-wide-medium-sans;
   letter-spacing: 0.5px;
 }
 

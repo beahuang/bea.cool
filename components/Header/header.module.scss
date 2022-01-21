@@ -5,9 +5,10 @@
   align-items: center;
   color: $c-primary;
   margin-bottom: $spacing-sm;
-  height: $header-height;
+  height: $nav-height;
   z-index: $z-index-nav;
   justify-content: space-between;
+  margin-top: $ticker-height;
 }
 
 .header--dark {

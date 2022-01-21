@@ -4,5 +4,6 @@ export { default as Header } from './Header';
 export { default as ItemDescription } from './ItemDescription';
 export { default as Layout } from './Layout';
 export { default as List } from './List';
+export { default as NewsTicker } from './NewsTicker';
 export { default as SiteMeta } from './SiteMeta';
 export { default as ToolTip } from './ToolTip';

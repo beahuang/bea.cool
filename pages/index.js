@@ -1,4 +1,4 @@
-import { Gallery, List } from 'components';
+import { Gallery, List, NewsTicker } from 'components';
 
 import mobileAppImage from 'public/img/mobile-app.png';
 import solugenImage from 'public/img/solugen.jpeg';
@@ -104,6 +104,7 @@ const projects = [
 export default function Home({ view }) {
   return (
     <>
+      <NewsTicker />
       {view === 'GALLERY' && <Gallery items={projects} />}
       {view === 'LIST' && <List items={projects} />}
     </>
