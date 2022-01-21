@@ -43,10 +43,12 @@
   @include margin($spacing-sm x $spacing-sm);
   line-height: $lh-tighter;
   letter-spacing: -0.1px;
+  font-size: $fs-sm;
 
   @include mq($tablet-lg) {
     @include margin($spacing-xs x $spacing-sm);
     line-height: $lh-base;
+    font-size: $fs-base;
   }
 }
 
@@ -99,6 +101,7 @@
   @include margin(0);
   width: $col-12;
   border-top: 1px solid #000000;
+  font-size: $fs-sm;
 
   a {
     @include padding(x $spacing-xs);
@@ -106,6 +109,7 @@
   }
 
   svg {
+    @include size(15px);
     display: inline;
     transition: all 0.1s $easeInQuad;
     transform: translate(0, 3px);
@@ -117,6 +121,11 @@
 
   @include mq($tablet-lg) {
     border: none !important;
+    font-size: $fs-base;
+
+    svg {
+      @include size(18px);
+    }
   }
 
   &:hover {

@@ -339,21 +339,23 @@ export default function Gallery({ items }) {
         {currentGalleryImage && <ItemDescription item={currentGalleryImage.item} />}
 
         <div className={styles.slider}>
-          <input
-            ref={sliderRef}
-            className={styles.range}
-            type="range"
-            min="0"
-            value={sliderVal}
-            max={((items.length - 1) / items.length) * zMax.current}
-            onChange={sliderZoom}
-          />
-          <div className={styles.sliderTicks}>
-            {items.map((item, i) => (
-              <span className={styles.tick} key={i}>
-                &mdash;
-              </span>
-            ))}
+          <div className={styles.sliderWrapper}>
+            <input
+              ref={sliderRef}
+              className={styles.range}
+              type="range"
+              min="0"
+              value={sliderVal}
+              max={((items.length - 1) / items.length) * zMax.current}
+              onChange={sliderZoom}
+            />
+            <div className={styles.sliderTicks}>
+              {items.map((item, i) => (
+                <span className={styles.tick} key={i}>
+                  &mdash;
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
