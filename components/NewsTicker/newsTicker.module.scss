@@ -1,4 +1,5 @@
-$duration: 18s;
+$duration-mobile: 15s;
+$duration: 20s;
 
 @-webkit-keyframes ticker {
   0% {
@@ -36,7 +37,11 @@ $duration: 18s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-name: ticker;
-  animation-duration: $duration;
+  animation-duration: $duration-mobile;
+
+  @include mq($tablet-lg) {
+    animation-duration: $duration;
+  }
 }
 
 .text {
@@ -47,7 +52,7 @@ $duration: 18s;
   padding-top: 8px;
 
   span {
-    margin-right: $spacing-lg;
+    margin-right: $spacing-md;
   }
 
   @include mq($tablet-lg) {
