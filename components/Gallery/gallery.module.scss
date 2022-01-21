@@ -56,11 +56,18 @@
 
 .zoomIn {
   cursor: url(/cursor/zoom-in.png) 20 20, zoom-in;
+
+  @include mq($tablet-lg) {
+    height: 40vh;
+  }
 }
 
 .zoomOut {
   bottom: 0;
   cursor: url(/cursor/zoom-out.png) 20 20, zoom-out;
+  @include mq($tablet-lg) {
+    height: 60vh;
+  }
 }
 
 .imageContainer {
