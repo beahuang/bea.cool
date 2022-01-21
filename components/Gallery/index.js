@@ -55,6 +55,8 @@ export default function Gallery({ items }) {
 
     zStart.current = imageAttrObjs.current[totalImages - 1].translateZ;
     zCurr.current = imageAttrObjs.current[totalImages - 1].translateZ;
+
+    setSliderVal(0);
     setIsLoading(false);
   };
 
@@ -63,7 +65,8 @@ export default function Gallery({ items }) {
   };
 
   const calculatePosition = (index, image) => {
-    const quadrant = index % 4;
+    const randomStart = Math.floor(getRandomInt(0, 4));
+    const quadrant = (randomStart + index) % 4;
     const { height: imageHeight, width: imageWidth } = image.getBoundingClientRect();
     const { height: galleryHeight, width: galleryWidth } =
       galleryRef.current.getBoundingClientRect();
