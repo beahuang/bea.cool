@@ -14,14 +14,16 @@ $duration: 20s;
 }
 
 .tickerWrap {
-  @include fixed(1px x x 0);
+  @include fixed(0 x x 0);
   width: 100%;
   overflow: hidden;
   height: $ticker-height;
-  border-top: 1px solid $c-black;
+  border-top: 2px solid $c-black;
   border-bottom: 1px solid $c-black;
   box-sizing: content-box;
   padding-left: 100%;
+  background-color: $c-white;
+  z-index: $z-index-ticker;
 }
 
 .ticker {
@@ -40,5 +42,11 @@ $duration: 20s;
 .text {
   font-family: $ff-sans;
   font-style: italic;
-  padding-top: 5px;
+  font-size: $fs-sm;
+  padding-top: 8px;
+
+  @include mq($tablet-lg) {
+    font-size: $fs-base;
+    padding-top: 5px;
+  }
 }

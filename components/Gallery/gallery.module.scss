@@ -55,6 +55,7 @@
 }
 
 .zoomIn {
+  top: 0;
   cursor: url(/cursor/zoom-in.png) 20 20, zoom-in;
 
   @include mq($tablet-lg) {

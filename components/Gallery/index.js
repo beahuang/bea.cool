@@ -273,21 +273,11 @@ export default function Gallery({ items }) {
     <>
       {isLoading && (
         <section>
-          <h1>loading...</h1>
+          <h1 className="visually-hidden">loading...</h1>
         </section>
       )}
       <section className={styles.gallery} onMouseMove={handleMouseMove} onWheelCapture={onWheel}>
         <div className={styles.galleryContainer} ref={galleryRef}>
-          <button
-            className={styles.zoomIn}
-            onMouseUp={clearZoomDirection}
-            onMouseDown={() => handleMouseDown('IN')}
-          ></button>
-          <button
-            className={styles.zoomOut}
-            onMouseUp={clearZoomDirection}
-            onMouseDown={() => handleMouseDown('OUT')}
-          ></button>
           <div className={styles.imageContainer}>
             {items.map((item, i) => {
               const transObj = imageAttrObjs.current[i] ?? {
@@ -331,6 +321,16 @@ export default function Gallery({ items }) {
               );
             })}
           </div>
+          <button
+            className={styles.zoomIn}
+            onMouseUp={clearZoomDirection}
+            onMouseDown={() => handleMouseDown('IN')}
+          ></button>
+          <button
+            className={styles.zoomOut}
+            onMouseUp={clearZoomDirection}
+            onMouseDown={() => handleMouseDown('OUT')}
+          ></button>
         </div>
 
         <div className={styles.headingContainer} ref={titleRef}>
