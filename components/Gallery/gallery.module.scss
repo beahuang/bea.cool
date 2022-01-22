@@ -94,7 +94,7 @@
 }
 
 .slider {
-  @include absolute(x 0 5% 0);
+  @include absolute(x 0 100px 0);
   @include margin(0 $grid-spacing-mobile);
   @include padding(0 $grid-spacing-mobile);
   cursor: pointer;
