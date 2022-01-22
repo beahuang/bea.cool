@@ -4,6 +4,7 @@ import { Tween } from 'react-gsap';
 
 import { useWindowDimensions } from 'hooks';
 import { ItemDescription } from 'components';
+import blurImage from 'public/img/blur.png';
 import styles from './list.module.scss';
 
 export default function List({ items }) {
@@ -58,6 +59,9 @@ export default function List({ items }) {
                   width={item.image.width}
                   height={item.image.height}
                   alt={item.altText}
+                  priority={i < 4}
+                  placeholder="blur"
+                  blurDataURL={blurImage.src}
                 />
               </div>
             </Tween>
