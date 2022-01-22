@@ -5,10 +5,14 @@
   align-items: center;
   color: $c-primary;
   margin-bottom: $spacing-sm;
-  height: $nav-height;
+  height: $nav-height-mobile;
   z-index: $z-index-nav;
   justify-content: space-between;
   margin-top: $ticker-height;
+
+  @include mq($tablet-lg) {
+    height: $nav-height;
+  }
 }
 
 .header--dark {

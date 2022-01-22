@@ -92,9 +92,11 @@ $desktop: 1024px;
 $desktop-lg: 1440px;
 
 // Header
-$nav-height: 100px;
-$header-height: 140px;
 $ticker-height: 40px;
+$nav-height: 100px;
+$nav-height-mobile: 60px;
+$header-height-mobile: calc($ticker-height + $nav-height-mobile);
+$header-height: calc($ticker-height + $nav-height);
 
 // Transitions
 $transition-primary: all 150ms ease-in-out;
