@@ -89,7 +89,7 @@ export default function Gallery({ items }) {
   };
 
   const calculatePositionDesktop = (index, image) => {
-    const randomStart = Math.floor(getRandomInt(0, 4));
+    const randomStart = Math.floor(getRandomInt(0, 2));
     const quadrant = (randomStart + index) % 4;
     const { height: imageHeight, width: imageWidth } = image.getBoundingClientRect();
     const { height: galleryHeight, width: galleryWidth } =
@@ -101,8 +101,8 @@ export default function Gallery({ items }) {
     let randomTop = 0,
       randomLeft = 0;
 
-    const yOffset = windowWidth < 768 ? 250 : 150;
-    const XOffset = windowWidth < 768 ? 0 : 150;
+    const yOffset = 0.2 * windowHeight;
+    const XOffset = 0.2 * windowWidth;
 
     switch (quadrant) {
       // top left
@@ -115,15 +115,15 @@ export default function Gallery({ items }) {
         randomTop = getRandomInt(yOffset, bottomBound / 2);
         randomLeft = getRandomInt(rightBound / 2, rightBound - XOffset);
         break;
-      // bottom right
+      // bottom left
       case 2:
         randomTop = getRandomInt(bottomBound / 2, bottomBound / 2 + yOffset);
-        randomLeft = getRandomInt(rightBound / 2, rightBound - XOffset);
+        randomLeft = getRandomInt(XOffset, rightBound / 2);
         break;
-      // bottom left
+      // bottom right
       case 3:
         randomTop = getRandomInt(bottomBound / 2, bottomBound / 2 + yOffset);
-        randomLeft = getRandomInt(XOffset, rightBound / 2);
+        randomLeft = getRandomInt(rightBound / 2, rightBound - XOffset);
         break;
     }
 
