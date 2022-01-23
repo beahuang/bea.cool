@@ -6,7 +6,7 @@ $gridLine: 1px;
   height: 100%;
   left: 0;
   bottom: 0px;
-  perspective: 175px;
+  perspective: 50px;
   opacity: 0;
   pointer-events: none;
   z-index: -1;
@@ -24,7 +24,6 @@ $gridLine: 1px;
   bottom: 0;
   width: 100%;
   height: 100%;
-  margin-top: -50px;
   transform: rotateX(45deg);
 }
 

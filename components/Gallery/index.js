@@ -199,7 +199,7 @@ export default function Gallery({ items }) {
       }
     }
 
-    if (percentage > 0.05) {
+    if (percentage > 0.01) {
       setHeaderOpacity(0);
     } else {
       setHeaderOpacity(1);
@@ -306,7 +306,7 @@ export default function Gallery({ items }) {
       }
     }
 
-    if (percentage > 0.05) {
+    if (percentage > 0.01) {
       setHeaderOpacity(0);
     } else {
       setHeaderOpacity(1);
