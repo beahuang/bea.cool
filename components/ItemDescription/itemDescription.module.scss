@@ -9,6 +9,10 @@
   z-index: $z-index-modal-content;
   background: $c-white;
 
+  @include mq($tablet, $tablet-lg) {
+    @include padding(0);
+  }
+
   @include mq($tablet-lg) {
     @include absolute(inherit x $spacing-md $col-1);
     width: $col-10;
@@ -61,11 +65,16 @@
   justify-content: space-between;
   text-align: center;
 
+  @include mq($tablet, $tablet-lg) {
+    @include padding(0);
+  }
+
   @include mq($tablet-lg) {
     @include margin($spacing-xs x $spacing-lg);
     padding-left: 0;
     width: $col-5;
     text-align: right;
+    justify-content: flex-end;
   }
 
   @include mq($tablet-lg, $desktop) {
@@ -102,37 +111,53 @@
   width: $col-12;
   border-top: 1px solid #000000;
   font-size: $fs-sm;
+  cursor: pointer;
 
   a {
     @include padding(x $spacing-xs);
+    @include size(100%, 100%);
     display: inline-block;
   }
 
   svg {
     @include size(15px);
     display: inline;
-    transition: all 0.1s $easeInQuad;
     transform: translate(0, 3px);
   }
 
   &:nth-of-type(2) {
-    border-left: 1px solid black;
+    border-left: 1px solid $c-black;
   }
 
   @include mq($tablet-lg) {
     border: none !important;
     font-size: $fs-base;
+    width: initial;
+
+    a {
+      @include size(initial, initial);
+      border: 1px solid $c-black;
+      box-shadow: 7px -6px 0px 0px;
+      transition: all 0.1s $easeInQuad;
+    }
 
     svg {
       @include size(18px);
+    }
+
+    &:nth-of-type(2) {
+      margin-left: $spacing-md;
     }
   }
 
   &:hover {
     font-style: italic;
 
-    svg {
-      transform: translate(3px, -3px);
+    @include mq($tablet-lg) {
+      a {
+        transform: translate(6px, -7px);
+        box-shadow: none;
+      }
     }
   }
 }
