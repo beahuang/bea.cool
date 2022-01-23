@@ -181,8 +181,8 @@ export default function Gallery({ items }) {
 
   const animate = () => {
     window.requestAnimationFrame(animate);
-
-    const percentage = Math.abs(zStart.current - zCurr.current) / zMax.current;
+    const zoomDistance = zStart.current - zCurr.current;
+    const percentage = Math.abs(zoomDistance) / zMax.current;
 
     if (zoomDirection.current === 'IN') {
       if (percentage >= 0 && percentage < 0.95) {
@@ -191,7 +191,7 @@ export default function Gallery({ items }) {
         window.cancelAnimationFrame(animate);
       }
     } else if (zoomDirection.current === 'OUT') {
-      if (0 < percentage && percentage <= 0.95) {
+      if (0 < percentage && percentage <= 0.95 && zoomDistance <= 0) {
         zoom('minus');
       } else {
         window.cancelAnimationFrame(animate);
@@ -286,18 +286,15 @@ export default function Gallery({ items }) {
   }, [items]);
 
   const onWheel = e => {
-    const percentage = Math.abs(zStart.current - zCurr.current) / zMax.current;
+    const zoomDistance = zStart.current - zCurr.current;
+    const percentage = Math.abs(zoomDistance) / zMax.current;
 
     if (e.deltaY > 0) {
       if (percentage >= 0 && percentage < 0.95) {
         zoom('plus');
       }
     } else if (e.deltaY < 0) {
-      if (0 < percentage && percentage <= 0.95) {
-        // Fix issue with scroll -> slider -> zoom out bug
-        if (zStart.current - zCurr.current > 0) {
-          return;
-        }
+      if (0 < percentage && percentage <= 0.95 && zoomDistance <= 0) {
         zoom('minus');
       }
     }
