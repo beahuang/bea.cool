@@ -6,8 +6,12 @@ $gridLine: 1px;
   height: 100%;
   left: 0;
   bottom: 0px;
-  perspective: 175px;
+  perspective: 70px;
   pointer-events: none;
+
+  @include mq($tablet) {
+    perspective: 175px;
+  }
 }
 
 .grid {

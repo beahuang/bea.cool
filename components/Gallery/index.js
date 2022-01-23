@@ -34,6 +34,7 @@ export default function Gallery({ items }) {
     tiltY: 0,
   });
   const [sliderVal, setSliderVal] = useState(0);
+  const [headerOpacity, setHeaderOpacity] = useState(1);
 
   const setUpGallery = () => {
     const totalImages = items.length;
@@ -197,6 +198,12 @@ export default function Gallery({ items }) {
         window.cancelAnimationFrame(animate);
       }
     }
+
+    if (percentage > 0.05) {
+      setHeaderOpacity(0);
+    } else {
+      setHeaderOpacity(1);
+    }
   };
 
   const zoom = direction => {
@@ -204,12 +211,13 @@ export default function Gallery({ items }) {
     if (!imageLength) {
       return;
     }
+    const zoomDistance = zStart.current - zCurr.current;
+    const percentage = Math.abs(zoomDistance) / zMax.current;
 
     imageAttrObjs.current = imageAttrObjs.current.map((imgObj, index) => {
       const movementInterval = (1 / items.length) * 1000;
       const initialOpacity = 1 - index / items.length;
-      const zoomDistance = zStart.current - zCurr.current;
-      const newOpacity = initialOpacity + Math.abs(zoomDistance) / zMax.current;
+      const newOpacity = initialOpacity + percentage;
       let newTranslateZ;
 
       if (direction === 'plus') {
@@ -297,6 +305,12 @@ export default function Gallery({ items }) {
         zoom('minus');
       }
     }
+
+    if (percentage > 0.05) {
+      setHeaderOpacity(0);
+    } else {
+      setHeaderOpacity(1);
+    }
   };
 
   return (
@@ -364,15 +378,21 @@ export default function Gallery({ items }) {
           ></button>
         </div>
 
-        <div className={styles.headingContainer}>
-          <Tween
-            to={{
-              transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
-            }}
-          >
-            <h1 className={styles.heading}>Selected Projects</h1>
-          </Tween>
-        </div>
+        <Tween
+          to={{
+            opacity: headerOpacity,
+          }}
+        >
+          <div className={styles.headingContainer}>
+            <Tween
+              to={{
+                transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
+              }}
+            >
+              <h1 className={styles.heading}>Selected Projects</h1>
+            </Tween>
+          </div>
+        </Tween>
 
         {currentGalleryImage && <ItemDescription item={currentGalleryImage.item} />}
 
