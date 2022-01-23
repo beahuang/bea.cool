@@ -3,11 +3,22 @@ import { GridIcon, GalleryIcon } from 'svgs';
 import styles from './header.module.scss';
 
 export default function Header({ theme, view, setView }) {
+  const toggleView = () => {
+    if (view === 'GALLERY') {
+      setView('LIST');
+    } else {
+      setView('GALLERY');
+    }
+  };
+
   return (
     <header {...className(styles.header, theme === 'dark' && styles['header--dark'])}>
       <div className={styles.logo}>
-        <p>🐝</p>
-        <h1 className="visually-hidden">Logo</h1>
+        <button onClick={toggleView}>
+          <p>
+            🐝 <span className="visually-hidden">toggle between gallery and list view</span>
+          </p>
+        </button>
       </div>
       <ul className={styles.list}>
         <li {...className(styles.listItem, view === 'GALLERY' && styles.listActive)}>
