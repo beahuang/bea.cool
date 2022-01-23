@@ -350,6 +350,7 @@ export default function Gallery({ items }) {
                 </Tween>
               );
             })}
+            <PerspectiveGrid />
           </div>
           <button
             className={styles.zoomIn}
@@ -396,8 +397,6 @@ export default function Gallery({ items }) {
           </div>
         </div>
       </section>
-
-      <PerspectiveGrid />
     </>
   );
 }
