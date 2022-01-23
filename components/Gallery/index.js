@@ -286,10 +286,16 @@ export default function Gallery({ items }) {
   }, [items]);
 
   const onWheel = e => {
-    if (e.deltaY > 0 && zCurr.current <= 0) {
-      zoom('plus');
-    } else if (e.deltaY < 0 && zCurr.current >= zStart.current) {
-      zoom('minus');
+    const percentage = Math.abs(zStart.current - zCurr.current) / zMax.current;
+
+    if (e.deltaY > 0) {
+      if (percentage >= 0 && percentage < 0.95) {
+        zoom('plus');
+      }
+    } else if (e.deltaY < 0) {
+      if (0 < percentage && percentage <= 0.95) {
+        zoom('minus');
+      }
     }
   };
 
