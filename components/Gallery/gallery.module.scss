@@ -124,11 +124,11 @@
     transform: rotate(-90deg);
     -webkit-transform-origin: left top;
     flex-direction: column;
-    height: 90%;
+    height: 95%;
   }
 
   @include mq($desktop) {
-    height: 93%;
+    height: 100%;
   }
 }
 

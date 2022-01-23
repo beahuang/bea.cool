@@ -294,6 +294,10 @@ export default function Gallery({ items }) {
       }
     } else if (e.deltaY < 0) {
       if (0 < percentage && percentage <= 0.95) {
+        // Fix issue with scroll -> slider -> zoom out bug
+        if (zStart.current - zCurr.current > 0) {
+          return;
+        }
         zoom('minus');
       }
     }
