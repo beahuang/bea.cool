@@ -206,17 +206,16 @@ export default function Gallery({ items }) {
     }
 
     imageAttrObjs.current = imageAttrObjs.current.map((imgObj, index) => {
-      const movementInterval = (1 / items.length) * 1000,
-        opacityInterval = movementInterval / (1000 * 10);
-
-      let newTranslateZ, newOpacity;
+      const movementInterval = (1 / items.length) * 1000;
+      const initialOpacity = 1 - index / items.length;
+      const zoomDistance = zStart.current - zCurr.current;
+      const newOpacity = initialOpacity + Math.abs(zoomDistance) / zMax.current;
+      let newTranslateZ;
 
       if (direction === 'plus') {
         newTranslateZ = imgObj.translateZ + movementInterval;
-        newOpacity = imgObj.opacity + opacityInterval;
       } else if (direction === 'minus') {
         newTranslateZ = imgObj.translateZ - movementInterval;
-        newOpacity = imgObj.opacity - opacityInterval;
       }
 
       return {
