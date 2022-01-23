@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Tween } from 'react-gsap';
 
-import { ItemDescription } from 'components';
+import { ItemDescription, PerspectiveGrid } from 'components';
 import { useArrayRef, useWindowDimensions } from 'hooks';
 import { getRandomInt } from 'utils';
 import blurImage from 'public/img/blur.png';
@@ -396,6 +396,8 @@ export default function Gallery({ items }) {
           </div>
         </div>
       </section>
+
+      <PerspectiveGrid />
     </>
   );
 }
