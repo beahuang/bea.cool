@@ -65,6 +65,31 @@ export default function Gallery({ items }) {
   };
 
   const calculatePosition = (index, image) => {
+    if (windowWidth < 768) {
+      return calculatePositionMobile(image);
+    } else {
+      return calculatePositionDesktop(index, image);
+    }
+  };
+
+  const calculatePositionMobile = image => {
+    const { height: imageHeight, width: imageWidth } = image.getBoundingClientRect();
+    const { height: galleryHeight, width: galleryWidth } =
+      galleryRef.current.getBoundingClientRect();
+
+    const bottomBound = galleryHeight - imageHeight,
+      rightBound = galleryWidth - imageWidth;
+
+    const YOFFSET = 300;
+    const randomTop = getRandomInt(YOFFSET, bottomBound / 2);
+
+    return {
+      top: randomTop,
+      left: rightBound / 2,
+    };
+  };
+
+  const calculatePositionDesktop = (index, image) => {
     const randomStart = Math.floor(getRandomInt(0, 4));
     const quadrant = (randomStart + index) % 4;
     const { height: imageHeight, width: imageWidth } = image.getBoundingClientRect();
