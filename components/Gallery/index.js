@@ -13,7 +13,6 @@ import styles from './gallery.module.scss';
 export default function Gallery({ items }) {
   const { height: windowHeight, width: windowWidth } = useWindowDimensions();
   const sliderRef = useRef();
-  const titleRef = useRef();
   const galleryRef = useRef();
   const requestRef = useRef();
   const zoomDirection = useRef();
@@ -358,7 +357,7 @@ export default function Gallery({ items }) {
           ></button>
         </div>
 
-        <div className={styles.headingContainer} ref={titleRef}>
+        <div className={styles.headingContainer}>
           <Tween
             to={{
               transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
