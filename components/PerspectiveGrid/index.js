@@ -6,12 +6,12 @@ export default function PerspectiveGrid() {
     <div className={styles.gridWrapper}>
       <div className={styles.grid}>
         <div className={styles.vertical}>
-          {Array.from(Array(20)).map((x, i) => {
+          {Array.from(Array(26)).map((x, i) => {
             return <div className={styles.line} key={i}></div>;
           })}
         </div>
         <div className={styles.horizontal}>
-          {Array.from(Array(21)).map((x, i) => {
+          {Array.from(Array(26)).map((x, i) => {
             return <div className={styles.line} key={i}></div>;
           })}
         </div>

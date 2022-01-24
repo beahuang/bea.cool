@@ -6,7 +6,8 @@ $gridLine: 1px;
   height: 100%;
   left: 0;
   bottom: 0px;
-  perspective: 50px;
+  perspective: 200px;
+  transform: translateY(150px);
   opacity: 0;
   pointer-events: none;
   z-index: -1;
@@ -38,66 +39,12 @@ $gridLine: 1px;
   left: 0;
   bottom: 0;
   width: $gridLine;
-  &:nth-child(1) {
-    left: 5%;
-  }
-  &:nth-child(2) {
-    left: 10%;
-  }
-  &:nth-child(3) {
-    left: 15%;
-  }
-  &:nth-child(4) {
-    left: 20%;
-  }
-  &:nth-child(5) {
-    left: 25%;
-  }
-  &:nth-child(6) {
-    left: 30%;
-  }
-  &:nth-child(7) {
-    left: 35%;
-  }
-  &:nth-child(8) {
-    left: 40%;
-  }
-  &:nth-child(9) {
-    left: 45%;
-  }
-  &:nth-child(10) {
-    left: 50%;
-  }
-  &:nth-child(11) {
-    left: 55%;
-  }
-  &:nth-child(12) {
-    left: 60%;
-  }
-  &:nth-child(13) {
-    left: 65%;
-  }
-  &:nth-child(14) {
-    left: 70%;
-  }
-  &:nth-child(15) {
-    left: 75%;
-  }
-  &:nth-child(16) {
-    left: 80%;
-  }
-  &:nth-child(17) {
-    left: 85%;
-  }
-  &:nth-child(18) {
-    left: 90%;
-  }
-  &:nth-child(19) {
-    left: 95%;
-  }
-  &:nth-child(20) {
-    left: 100%;
-    margin-left: -1px;
+
+  $elements: 25;
+  @for $i from 0 to $elements {
+    &:nth-child(#{$i + 1}) {
+      left: 4% * $i;
+    }
   }
 }
 
@@ -108,88 +55,16 @@ $gridLine: 1px;
   height: $gridLine;
   z-index: 2;
 
-  &:nth-child(1) {
-    top: 5%;
-    opacity: 0.2;
+  $elements: 25;
+  @for $i from 0 to $elements {
+    &:nth-child(#{$i + 1}) {
+      top: 4% * $i;
+      margin-top: -1px;
+      opacity: 1 * $i/$elements;
+    }
   }
-  &:nth-child(2) {
-    top: 10%;
-    opacity: 0.25;
-  }
-  &:nth-child(3) {
-    top: 15%;
-    opacity: 0.275;
-  }
-  &:nth-child(4) {
-    top: 20%;
-    opacity: 0.3;
-  }
-  &:nth-child(5) {
-    top: 25%;
-    opacity: 0.375;
-  }
-  &:nth-child(6) {
-    top: 30%;
-    opacity: 0.4;
-  }
-  &:nth-child(7) {
-    top: 35%;
-    opacity: 0.4;
-  }
-  &:nth-child(8) {
-    top: 40%;
-    opacity: 0.4;
-  }
-  &:nth-child(9) {
-    top: 45%;
-    opacity: 0.45;
-  }
-  &:nth-child(10) {
-    top: 50%;
-    opacity: 0.5;
-  }
-  &:nth-child(11) {
-    top: 55%;
-    opacity: 0.55;
-  }
-  &:nth-child(12) {
-    top: 60%;
-    opacity: 0.6;
-  }
-  &:nth-child(13) {
-    top: 65%;
-    opacity: 0.65;
-  }
-  &:nth-child(14) {
-    top: 70%;
-    opacity: 0.7;
-  }
-  &:nth-child(15) {
-    top: 75%;
-    opacity: 0.75;
-  }
-  &:nth-child(16) {
-    top: 80%;
-    opacity: 0.8;
-  }
-  &:nth-child(17) {
-    top: 85%;
-    opacity: 0.9;
-  }
-  &:nth-child(18) {
-    top: 90%;
-    opacity: 0.95;
-  }
-  &:nth-child(19) {
-    top: 95%;
-    opacity: 0.975;
-  }
-  &:nth-child(20) {
-    top: 100%;
-    margin-top: -1px;
-    opacity: 1;
-  }
-  &:nth-child(21) {
+
+  &:last-child {
     opacity: 0.05;
   }
 }
