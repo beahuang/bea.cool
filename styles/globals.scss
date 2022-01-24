@@ -22,18 +22,30 @@ body {
 
 body {
   @include padding($grid-spacing-mobile);
+  padding-bottom: 0;
 
   @include mq($tablet) {
     @include padding($grid-spacing);
+    padding-bottom: 0;
   }
 
   @include mq($desktop) {
     @include padding($grid-spacing * 2);
+    padding-bottom: 0;
   }
 }
 
 main {
   min-height: 50vh;
+  height: calc(100vh - $grid-spacing-mobile);
+
+  @include mq($tablet) {
+    height: calc(100vh - $grid-spacing);
+  }
+
+  @include mq($desktop) {
+    height: calc(100vh - $grid-spacing * 2);
+  }
 }
 
 a {

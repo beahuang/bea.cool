@@ -14,8 +14,16 @@
   }
 
   @include mq($tablet-lg) {
-    @include absolute(inherit x $spacing-md $col-1);
+    @include absolute(inherit x $spacing-xl $col-1);
     width: $col-10;
+    align-items: flex-end;
+    flex-flow: row wrap;
+    padding-right: 0;
+  }
+
+  @include mq($desktop) {
+    @include absolute(inherit x $spacing-xl $col-2);
+    width: $col-8;
     align-items: flex-end;
     flex-flow: row wrap;
     padding-right: 0;

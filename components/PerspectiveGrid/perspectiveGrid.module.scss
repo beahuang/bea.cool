@@ -11,7 +11,7 @@ $gridLine: 1px;
   pointer-events: none;
   z-index: -1;
 
-  @include mq($tablet) {
+  @include mq($tablet-lg) {
     opacity: 1;
   }
 }

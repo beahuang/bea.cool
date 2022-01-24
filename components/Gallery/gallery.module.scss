@@ -14,7 +14,7 @@
 
   @include mq($desktop) {
     width: 100vw;
-    height: calc(100vh - 4 * $grid-spacing);
+    height: 100%;
     margin-left: -2 * $grid-spacing;
   }
 }
