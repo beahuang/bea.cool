@@ -24,14 +24,14 @@ export default function ItemDescription({ item, isList }) {
         {item.liveSiteUrl && (
           <li className={styles.item}>
             <a href={item.liveSiteUrl} target="_blank" rel="noreferrer">
-              Live Site <ExternalArrow />
+              LIVE SITE <ExternalArrow />
             </a>
           </li>
         )}
         {item.caseStudyUrl && (
           <li className={styles.item}>
             <a href={item.caseStudyUrl} target="_blank" rel="noreferrer">
-              Case Study <ExternalArrow />
+              CASE STUDY <ExternalArrow />
             </a>
           </li>
         )}

@@ -139,7 +139,7 @@
 
   @include mq($tablet-lg) {
     border: none !important;
-    font-size: $fs-base;
+    font-size: $fs-sm;
     width: initial;
 
     a {
