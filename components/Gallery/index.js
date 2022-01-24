@@ -370,11 +370,13 @@ export default function Gallery({ items }) {
             className={styles.zoomIn}
             onMouseUp={clearZoomDirection}
             onMouseDown={() => handleMouseDown('IN')}
+            tabIndex={-1}
           ></button>
           <button
             className={styles.zoomOut}
             onMouseUp={clearZoomDirection}
             onMouseDown={() => handleMouseDown('OUT')}
+            tabIndex={-1}
           ></button>
         </div>
 
