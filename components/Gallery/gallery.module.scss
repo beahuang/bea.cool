@@ -126,10 +126,6 @@
     flex-direction: column;
     height: 95%;
   }
-
-  @include mq($desktop) {
-    height: 100%;
-  }
 }
 
 .sliderWrapper {
