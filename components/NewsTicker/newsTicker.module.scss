@@ -25,6 +25,10 @@ $duration: 30s;
   padding-left: 100%;
   background-color: $c-white;
   z-index: $z-index-ticker;
+
+  @include mq($tablet-lg) {
+    display: none;
+  }
 }
 
 .ticker {

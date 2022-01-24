@@ -2,7 +2,7 @@
   @include absolute(0);
   @include grid-parent;
   @include padding($spacing-sm n);
-  align-items: center;
+  align-items: flex-start;
   color: $c-primary;
   margin-bottom: $spacing-sm;
   height: $nav-height-mobile;
@@ -12,11 +12,18 @@
 
   @include mq($tablet-lg) {
     height: $nav-height;
+    margin-top: 0;
+    background-color: $c-white;
   }
 }
 
 .header--dark {
   color: $c-white;
+}
+
+.beeWrapper {
+  display: flex;
+  align-items: flex-start;
 }
 
 .logo {
@@ -26,6 +33,19 @@
   @include mq($tablet-lg) {
     @include padding(0 $grid-spacing);
   }
+}
+
+.aboutText {
+  font-size: $fs-sm;
+  display: none;
+
+  @include mq($tablet-lg) {
+    display: block;
+  }
+}
+
+.aboutLine {
+  display: block;
 }
 
 .list {

@@ -21,8 +21,9 @@ const projects = [
   },
   {
     title: 'Solugen',
-    description: 'Website for a sustainable chemicals start-up',
-    technologies: ['WordPress', 'Docker'],
+    description:
+      'CMS powered website showcasing the new branding for a sustainable chemicals start-up',
+    technologies: ['WordPress', 'Docker', 'Twig'],
     image: solugenImage,
     liveSiteUrl: 'https://solugen.com/',
     caseStudyUrl: 'https://upstatement.com/case-study/solugen/',
@@ -40,7 +41,7 @@ const projects = [
   },
   {
     title: 'Arnold Arboretum',
-    description: "Website for Boston's museum of trees",
+    description: "CMS powered website for Boston's museum of trees",
     technologies: ['WordPress', 'Algolia', 'Barba.js', 'ArcGIS', 'Docker'],
     image: arnoldArboretumImage,
     liveSiteUrl: 'https://arboretum.harvard.edu/',
@@ -58,7 +59,8 @@ const projects = [
   },
   {
     title: 'Sasaki',
-    description: 'Website for interdisciplinary architecture, planning, landscape, and design firm',
+    description:
+      'CMS powered website for interdisciplinary architecture, planning, landscape, and design firm',
     technologies: ['WordPress', 'Algolia', 'Barba.js'],
     image: sasakiImage,
     liveSiteUrl: 'https://www.sasaki.com/',
@@ -92,7 +94,7 @@ const projects = [
   },
   {
     title: 'Emergence Capital',
-    description: 'Digital platform for a Silicon Vallery VC Firm',
+    description: 'CMS powered website for a Silicon Vallery VC Firm',
     technologies: ['Contentful', 'Gatsby', 'Netlify'],
     image: emergenceCapitalImage,
     caseStudyUrl: 'https://upstatement.com/case-study/emergence/',

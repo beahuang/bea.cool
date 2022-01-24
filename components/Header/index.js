@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-comment-textnodes */
 import { className } from 'utils';
 import { GridIcon, GalleryIcon } from 'svgs';
 import styles from './header.module.scss';
@@ -13,12 +14,20 @@ export default function Header({ theme, view, setView }) {
 
   return (
     <header {...className(styles.header, theme === 'dark' && styles['header--dark'])}>
-      <div className={styles.logo}>
-        <button onClick={toggleView}>
-          <p>
-            🐝 <span className="visually-hidden">toggle between gallery and list view</span>
-          </p>
-        </button>
+      <div className={styles.beeWrapper}>
+        <div className={styles.logo}>
+          <button onClick={toggleView}>
+            <p>
+              🐝 <span className="visually-hidden">toggle between gallery and list view</span>
+            </p>
+          </button>
+        </div>
+        <p className={styles.aboutText}>
+          <span className={styles.aboutLine}>✧°˖ welcome to my site ˖°✧ i&apos;m bea</span>
+          <span className={styles.aboutLine}>// currently engineering @ Upstatement</span>
+          <span className={styles.aboutLine}>// based in Queens, NY</span>
+          <span className={styles.aboutLine}>// send a note: to@bea.cool</span>
+        </p>
       </div>
       <ul className={styles.list}>
         <li {...className(styles.listItem, view === 'GALLERY' && styles.listActive)}>
