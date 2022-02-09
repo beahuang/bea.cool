@@ -60,7 +60,7 @@ $gridLine: 1px;
     &:nth-child(#{$i + 1}) {
       top: 4% * $i;
       margin-top: -1px;
-      opacity: 1 * $i/$elements;
+      opacity: calc(1 * $i / $elements);
     }
   }
 

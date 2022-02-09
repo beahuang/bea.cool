@@ -13,10 +13,12 @@ import emergenceCapitalImage from 'public/img/emergence-capital.png';
 
 const projects = [
   {
-    title: 'Mobile Reading App + Website',
+    title: 'Threadable iOS App + Website',
     description: 'A new social e-reader that will give readers a new way to engage with books',
     technologies: ['React Native', 'Ruby on Rails', 'Next.js', 'Sanity'],
     image: mobileAppImage,
+    caseStudyUrl: 'https://upstatement.com/case-study/threadable/',
+    appStoreUrl: 'https://apps.apple.com/us/app/threadable/id1550995547',
     altText: 'Grid of illustrated book covers',
   },
   {

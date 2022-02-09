@@ -28,6 +28,13 @@ export default function ItemDescription({ item, isList }) {
             </a>
           </li>
         )}
+        {item.appStoreUrl && (
+          <li className={styles.item}>
+            <a href={item.appStoreUrl} target="_blank" rel="noreferrer">
+              APP STORE <ExternalArrow />
+            </a>
+          </li>
+        )}
         {item.caseStudyUrl && (
           <li className={styles.item}>
             <a href={item.caseStudyUrl} target="_blank" rel="noreferrer">
