@@ -35,6 +35,20 @@ export default function ItemDescription({ item, isList }) {
             </a>
           </li>
         )}
+        {item.clientUrl && (
+          <li className={styles.item}>
+            <a href={item.clientUrl} target="_blank" rel="noreferrer">
+              CLIENT SITE <ExternalArrow />
+            </a>
+          </li>
+        )}
+        {item.designSystemUrl && (
+          <li className={styles.item}>
+            <a href={item.designSystemUrl} target="_blank" rel="noreferrer">
+              DESIGN SYSTEM <ExternalArrow />
+            </a>
+          </li>
+        )}
         {item.caseStudyUrl && (
           <li className={styles.item}>
             <a href={item.caseStudyUrl} target="_blank" rel="noreferrer">

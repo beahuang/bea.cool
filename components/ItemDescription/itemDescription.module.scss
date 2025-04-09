@@ -133,7 +133,7 @@
     transform: translate(0, 3px);
   }
 
-  &:nth-of-type(2) {
+  &:not(:first-of-type) {
     border-left: 1px solid $c-black;
   }
 
@@ -147,13 +147,14 @@
       border: 1px solid $c-black;
       box-shadow: 7px -6px 0px 0px;
       transition: all 0.1s $easeInQuad;
+      white-space: nowrap;
     }
 
     svg {
       @include size(18px);
     }
 
-    &:nth-of-type(2) {
+    &:not(:first-of-type) {
       margin-left: $spacing-md;
     }
   }
