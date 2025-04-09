@@ -9,7 +9,7 @@ export default function NewsTicker() {
         <p className={styles.text}>
           <span>~welcome to my site~ i&apos;m bea</span>
           <span>// currently engineering @ Upstatement</span>
-          <span>// based in Queens, NY</span>
+          <span>// based in the Hudson Valley, NY</span>
           <span>// send a note: to@bea.cool</span>
         </p>
       </div>

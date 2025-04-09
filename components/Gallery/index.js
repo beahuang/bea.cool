@@ -39,7 +39,7 @@ export default function Gallery({ items }) {
   const setUpGallery = () => {
     const totalImages = items.length;
 
-    imageAttrObjs.current = items.map((item, index) => {
+    imageAttrObjs.current = items.map((_item, index) => {
       const image = imageRefs.current[index];
       const posObj = calculatePosition(index, image);
 
@@ -410,7 +410,7 @@ export default function Gallery({ items }) {
               onChange={sliderZoom}
             />
             <div className={styles.sliderTicks}>
-              {items.map((item, i) => (
+              {items.map((_item, i) => (
                 <span className={styles.tick} key={i}>
                   &mdash;
                 </span>

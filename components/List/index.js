@@ -80,7 +80,7 @@ export default function List({ items }) {
             transform: `rotate3d(${titleTilt.tiltX}, ${titleTilt.tiltY}, 0, ${titleTilt.degree}deg)`,
           }}
         >
-          <h1 className={styles.heading}>Selected Projects</h1>
+          <h1 className={styles.heading}>All Projects</h1>
         </Tween>
       </div>
       {items.map((item, i) => {

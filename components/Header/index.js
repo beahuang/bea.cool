@@ -24,8 +24,8 @@ export default function Header({ theme, view, setView }) {
         </div>
         <p className={styles.aboutText}>
           <span className={styles.aboutLine}>✧°˖ welcome to my site ˖°✧ i&apos;m bea</span>
-          <span className={styles.aboutLine}>// currently engineering @ Upstatement</span>
-          <span className={styles.aboutLine}>// based in Queens, NY</span>
+          <span className={styles.aboutLine}>// currently engineering @ Threadable</span>
+          <span className={styles.aboutLine}>// based in the Hudson Valley, NY</span>
           <span className={styles.aboutLine}>// send a note: to@bea.cool</span>
         </p>
       </div>
